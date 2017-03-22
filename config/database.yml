@@ -81,4 +81,4 @@ test:
 production:
   <<: *default
   database: prognosium_production
-  password: <%= ENV['prognosium_DATABASE_PASSWORD'] %>
+  password: <%= ENV['PROGNOSIUM_DATABASE_PASSWORD'] %>
