@@ -1,0 +1,34 @@
+ru:
+  app:
+    title: Прогнозиум
+  project:
+    default_title: Новый проект
+    empty_title: Выберите проект или создайте новый
+    list_title: Ваши проекты
+    new: Новый проект
+    success:
+      created: "Новый проект успешно создан"
+      deleted: "Проект '%{title}' успешно удален"
+  auth:
+    email: Эл. почта
+    password: Пароль
+    password_confirmation: Подтвердите пароль
+    sign_up: Зарегистрироваться
+    sign_in: Войти
+    registrations: Перейти к регистрации
+    login: Перейти к авторизации
+    success:
+      sign_up: Вы успешно зарегестрировались. Письмо с подтверждением отправлено вам на почту
+      sign_in: Вы успешно авторизовались
+      sign_out: Приходите еще
+    error:
+      must_authed: Вы должны быть авторизованным
+      signed_in: Вы уже авторизованы
+  language:
+    russian: Русский
+    english: Английский
+  validation:
+    required: Это обязтельное поле
+    max_length: Должно быть меньше чем %{value} символов
+  close: Закрыть
+  remove: Удалить

@@ -1,0 +1,35 @@
+#project-form {
+  margin: 35px 0 25px 0;
+  .md-block {
+    margin: 0;
+  }
+  .title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+}
+.project-title {
+  width: 80%;
+  max-width: 650px;
+}
+.project-link.active {
+   span {
+    color: rgb(33,150,243);
+  }
+}
+.project-actions {
+  position: relative;
+  margin-bottom: 10px;
+  .md-datepicker-input-container {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.date-title {
+  min-height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}

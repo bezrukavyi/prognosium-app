@@ -1,0 +1,48 @@
+%md-dialog(aria_label='Upload dialog' ng_controller='AttachmentController as attachmentCtrl')
+  %form(id="attachment-upload-{{ dialog.object.id }}" ng-cloak='' name='uploadForm')
+    %md-toolbar
+      .md-toolbar-tools(layout='row' layout_align='space-between center')
+        %h2 {{ 'attachment.title' | translate:{name: dialog.object.title} }}
+
+        %md-button.md-icon-button(ng-click='dialog.close()')
+          %md-icon(aria_label='Close dialog') close
+
+    %md-dialog-content
+      %md-list(ng_show='!dialog.object.attachments.length')
+        %h4.center {{ 'attachment.empty_files' | translate }}
+
+      %md-list
+        %md-list-item.md-3-line.uploaded-list(ng_repeat='attachment in dialog.object.attachments')
+          %md-button.md-primary(ng_if="attachment.file.type !== 'image'"
+            ng_href='{{ attachment.file.url }}' target='_blank')
+
+            %md-icon(aria_label='Uploaded file') insert_drive_file
+            %span {{ attachment.file.filename }}
+
+          .uploaded-image.md-whiteframe-4dp(ng_if="attachment.file.type == 'image'"
+            ng-href='attachment.file.url')
+
+            %a(ng_href='{{ attachment.file.url }}' target='_blank')
+              %img(ng_src='{{ attachment.file.url }}')
+
+          %md-button.md-secondary(id='delete-attachment-{{ attachment.id }}'
+            ng-click='attachmentCtrl.delete(attachment, dialog.object)') {{ 'remove' | translate }}
+
+          %md-divider
+
+      %md-dialog-actions(layout='row' layout_align='center')
+        .loader(layout='row' layout_align='center' data_after_loaded='hide')
+          %md-progress-circular(md-mode='indeterminate' md-diameter='35')
+        %md-button.md-raised.md-primary(layout='row'
+          data_after_loaded='show'
+          ngf-change='attachmentCtrl.upload($files, dialog.object, dialog.type)'
+          ngf-select=''
+          ngf-multiple='true')
+
+          %input.hidden(name='file' type='file'
+            ngf-change='attachmentCtrl.upload($files, dialog.object, dialog.type)'
+            ngf-select=''
+            ngf-multiple='true')
+
+          %span {{ 'attachment.upload' | translate }}
+          %md-icon(aria-label='Upload file') file_upload

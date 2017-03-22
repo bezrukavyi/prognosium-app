@@ -1,0 +1,29 @@
+%md-content#content(flex='' layout='row')
+  .sign-up-container(layout='column' layout_align='center' flex='')
+    %form#new_user.auth-form(name='userForm'
+      ng-submit='user.create(userForm)'
+      role='form'
+      layout='row'
+      layout_align='center center')
+      
+      %md-whiteframe.md-whiteframe-z1(flex='30' layout='column' layout-padding='')
+
+        %md-content(layout='column' layout_align='stretch center')
+          %md-input-container.md-block
+            %label {{ 'auth.email' | translate }}
+            %input(ng_model='user.new.email' required='')
+          %md-input-container.md-block
+            %label {{ 'auth.password' | translate }}
+            %input(ng_model='user.new.password' type='password' required='')
+          %md-input-container.md-block
+            %label {{ 'auth.password_confirmation' | translate }}
+            %input(ng_model='user.new.password_confirmation' type='password' required='')
+
+        %md-input-container.omniauth-container
+          %md-button.md-raised.md-primary#google(ng-click="user.omniauth('google')") Google+
+          %md-button.md-raised.md-primary#facebook(ng-click="user.omniauth('facebook')") Facebook
+
+        %md-input-container(layout='column' layout_align='center center')
+          %md-button.md-raised.md-primary(type='submit') {{ 'auth.sign_up' | translate }}
+
+    %a.md-primary.center(ui-sref='sign_in') {{ 'auth.login' | translate }}

@@ -1,0 +1,23 @@
+.checked-task {
+  background: rgb(232, 232, 232);
+  opacity: 0.5;
+  .title {
+    display: block;
+    text-decoration: line-through;
+  }
+}
+.task-edit {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  md-input-container {
+    width: 100%;
+  }
+}
+.task-wrap {
+  padding: 0 20px;
+  margin-bottom: 20px;
+  @media (max-width: 320px) {
+    padding: 0.25em;
+  }
+}

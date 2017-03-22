@@ -1,0 +1,28 @@
+%md-toolbar
+  .md-toolbar-tools.md-whiteframe-2dp.todo-toolbar(layout='row' layout_align='space-between center')
+
+    %div
+      %md-button.md-button.md-ink-ripple.md-icon-button(hide_gt_sm='')
+        %md-icon(ng-click='main.toggleLeftSidenav()') menu
+
+      %h1.md-flex.show-gt-md {{ 'app.title' | translate }}
+
+    %div(layout='row' layout_align='space-between center')
+      .loader
+        %md-progress-circular(md_mode='indeterminate' md_diameter='25' data_after_loaded='hide')
+
+      %md-menu
+        %md-button.md-icon-button(aria_label='Open locale menu' ng-click='$mdMenu.open()')
+          %md-icon(md_menu_origin='') translate
+        %md-menu-content(ng_mouseleave='$mdMenu.close()' width='4')
+          %md-menu-item
+            %md-button(ng-click="changeLocale('en')")
+              {{ 'language.english' | translate }}
+          %md-menu-item
+            %md-button(ng-click="changeLocale('ru')")
+              {{ 'language.russian' | translate }}
+
+      %md-button#sign-out.md-icon-button.md-button.md-ink-ripple
+        %md-icon(ng-click='signOut()') exit_to_app
+
+%ui-view.view-slide-in(flex='' layout='row')

@@ -1,0 +1,22 @@
+.comments-wrap {
+  padding-left: 7%;
+}
+.comment-content {
+  padding: 0;
+  margin-bottom: 10px;
+}
+.comment-field {
+  margin: 0;
+}
+.uploaded-list {
+  display: flex;
+  align-items: center !important;
+  padding: 15px 10px !important;
+}
+.uploaded-image {
+  max-width: 150px;
+  img {
+    width: 100%;
+    display: block;
+  }
+}
