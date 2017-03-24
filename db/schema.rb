@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20170324105433) do
     t.string   "comment"
     t.integer  "position"
     t.integer  "project_id"
-    t.json     "initial_data"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.json     "initial_data", default: []
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 

@@ -5,7 +5,7 @@ class CreateTasks < ActiveRecord::Migration[5.0]
       t.string :comment
       t.integer :position
       t.references :project, foreign_key: true
-      t.json :initial_data
+      t.json :initial_data, default: []
 
       t.timestamps
     end

@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/email/rspec'
 require 'capybara-screenshot/rspec'
+require 'rectify/rspec'
 
 %w(support).each do |folder|
   Dir[Rails.root.join("spec/#{folder}/**/*.rb")].each do |component|
@@ -20,10 +21,13 @@ end
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.include ActionDispatch::TestProcess
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Warden::Test::Helpers
   config.include Support::WaitAjax
+  config.include Rectify::RSpec::Helpers
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

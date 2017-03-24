@@ -1,5 +1,7 @@
 include Support::Auth
 include Support::CanCanStub
+include Support::Command
+include Support::CanCanStub
 
 describe Api::TasksController, type: :controller do
   let(:user) { create :user }
@@ -43,24 +45,44 @@ describe Api::TasksController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:valid_params) do
-      { project_id: project.id, task: attributes_for(:task, project_id: project.id) }
+    let(:params) do
+      { project_id: project.id,
+        task: attributes_for(:task, project_id: project.id),
+        file: fixture_file_upload('/files/test.xlsx') }
     end
 
-    it 'returns a successful 200 response' do
-      post :create, params: valid_params
+    before do
+      receive_cancan(:load_and_authorize, task: @task)
+    end
+
+    it 'SaveTask call' do
+      allow(controller).to receive(:params).and_return(params)
+      expect(SaveTask).to receive(:call)
+      post :create, params: params
+    end
+
+    it 'success response by valid command' do
+      stub_const('SaveTask', Support::Command::Valid)
+      post :create, params: params
       expect(response).to be_success
     end
-    it 'create new task' do
-      expect { post :create, params: valid_params }
-        .to change { @tasks.reload.count }.by(1)
-    end
-    it 'when data invalid' do
-      post :create, params: { project_id: project.id,
-                              task: attributes_for(:task, :invalid,
-                                                   project_id: project.id) }
+
+    it 'error by invalid command' do
+      invalid_task = build :task, :invalid
+      invalid_task.save
+      stub_const('SaveTask', Support::Command::Invalid)
+      Support::Command::Invalid.block_value = invalid_task
+      post :create, params: params
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['error']).not_to be_blank
+    end
+
+    it 'error by invalid_file command' do
+      stub_const('SaveTask', Support::Command::InvalidFile)
+      Support::Command::InvalidFile.block_value = 'txt'
+      post :create, params: params
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq I18n.t('file.invalid', format: 'txt')
     end
   end
 

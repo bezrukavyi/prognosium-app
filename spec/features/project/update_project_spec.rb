@@ -23,7 +23,7 @@ feature 'Update project', type: :feature, js: true do
 
   scenario 'user can update project completed at' do
     old_completed = @project.completed_at
-    new_completed = (Time.now + 5.day)
+    new_completed = (Time.now + 5.days)
     check_completed_at(old_completed)
     completed_at_project(@project, new_completed)
     check_completed_at(old_completed, false)

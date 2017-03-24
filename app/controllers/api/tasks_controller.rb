@@ -7,10 +7,14 @@ module Api
     end
 
     def create
-      if @task.save
-        render json: @task
-      else
-        render json: { error: @task.errors.full_messages }
+      SaveTask.call(@task, params) do
+        on(:valid) { render json: @task }
+        on(:invalid) do |task|
+          render json: { error: task.errors.full_messages }
+        end
+        on(:invalid_file) do |file_format|
+          render json: { error: I18n.t('file.invalid', format: file_format) }
+        end
       end
     end
 

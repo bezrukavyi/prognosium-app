@@ -30,6 +30,8 @@ gem 'carrierwave'
 gem 'cloudinary'
 gem 'acts_as_list'
 gem 'rails_best_practices'
+gem 'roo'
+gem 'rectify'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -59,6 +61,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'wisper-rspec'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
