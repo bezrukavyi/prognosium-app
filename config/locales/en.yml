@@ -1,6 +1,6 @@
 en:
   app:
-    title: Prognosium
+    title: Angular ToDo
   project:
     default_title: New project
     empty_title: Choose project or create new
@@ -9,6 +9,11 @@ en:
     success:
       created: "New project success created"
       deleted: "Project '%{title}' success deleted"
+  task:
+    new: New task
+    success:
+      created: "Task '%{title}' success created"
+      deleted: "Task '%{title}' success deleted"
   auth:
     email: Email
     password: Password

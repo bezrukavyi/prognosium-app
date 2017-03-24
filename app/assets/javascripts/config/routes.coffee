@@ -35,6 +35,13 @@ angular.module('toDoApp').config ['$stateProvider', '$urlRouterProvider', '$loca
     parent: 'projects'
     templateUrl: 'projects/detail.html'
 
+  .state 'projects.task',
+    url: '/:projectId/tasks/:taskId'
+    parent: 'projects'
+    controller: 'TasksController'
+    controllerAs: 'tasks'
+    templateUrl: 'tasks/detail.html'
+
   $locationProvider.html5Mode(true)
   $urlRouterProvider.otherwise '/projects'
 ]

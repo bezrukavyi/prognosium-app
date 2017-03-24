@@ -7,5 +7,9 @@ FactoryGirl.define do
     trait :invalid do
       title nil
     end
+
+    trait :with_tasks do
+      tasks { create_list(:task, 2) }
+    end
   end
 end

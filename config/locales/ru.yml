@@ -1,6 +1,6 @@
 ru:
   app:
-    title: Прогнозиум
+    title: Angular ToDo
   project:
     default_title: Новый проект
     empty_title: Выберите проект или создайте новый
@@ -9,6 +9,11 @@ ru:
     success:
       created: "Новый проект успешно создан"
       deleted: "Проект '%{title}' успешно удален"
+  task:
+    new: Новая задача
+    success:
+      created: "Задача '%{title}' успешно создана"
+      deleted: "Задача '%{title}' успешно удалена"
   auth:
     email: Эл. почта
     password: Пароль

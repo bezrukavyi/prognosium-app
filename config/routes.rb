@@ -6,17 +6,11 @@ Rails.application.routes.draw do
       controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
     resources :translations, only: :show
-    resources :projects, except: [:edit, :new]
-
-    resources :tasks, only: [:create, :update, :destroy] do
-      resources :comments, only: [:create, :index]
+    resources :projects, except: [:edit, :new] do
+      resources :tasks, only: [:show, :create]
     end
 
-    resources :comments, only: [:update, :destroy] do
-      resources :attachments, only: :create
-    end
-
-    resources :attachments, only: :destroy
+    resources :tasks, only: [:update, :destroy]
   end
 
   get '*path', to: 'application#angular'

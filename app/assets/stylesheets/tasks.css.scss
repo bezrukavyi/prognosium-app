@@ -1,3 +1,5 @@
+@import 'projects';
+
 .checked-task {
   background: rgb(232, 232, 232);
   opacity: 0.5;
@@ -20,4 +22,7 @@
   @media (max-width: 320px) {
     padding: 0.25em;
   }
+}
+.task-form {
+  @extend .project-form;
 }

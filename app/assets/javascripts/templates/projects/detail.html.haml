@@ -1,11 +1,11 @@
 %md-content(flex='' ng_if='projects.currentProject')
 
-  %form#project-form(layout='column' layout_align='center center' name='editProjectForm')
+  %form#project-form.project-form(layout='column' layout_align='center center' name='editProjectForm')
     %md-input-container.md-block.project-title.read-field(ng_class="{ 'write': editProjectForm.edited }")
       %textarea#title-field.title(data_enter_event='projects.edit(editProjectForm, projects.currentProject)'
-        aria_label='Title'
-        md_maxlength='50'
-        md_no_asterisk=''
+        aria-label='Title'
+        md-maxlength='50'
+        md-no-asterisk=''
         required=''
         name='title'
         ng_model='projects.currentProject.title')
@@ -16,7 +16,7 @@
         %div(ng_message='md-maxlength') {{ 'validation.max_length' | translate:{value: 50} }}
 
     %md-actions.project-actions(layout='row' layout_align='center')
-      %md-button#edit-project.md-ink-ripple.md-icon-button.md-24(aria_label='edit project'
+      %md-button#edit-project.md-ink-ripple.md-icon-button.md-24(aria-label='edit project'
         ng-click='projects.edit(editProjectForm, projects.currentProject)')
 
         %md-icon(ng_if='!editProjectForm.edited') edit
@@ -30,3 +30,10 @@
         ng_change='projects.update(editProjectForm, projects.currentProject)')
 
     .date-title {{ projects.currentProject.completed_at | date: 'dd/MM/yy' }}
+
+  .tasks-content(layout='column' layout_align='center center' ng_controller='TasksController as tasks')
+    %tasks_create(ctrl='tasks' project='projects.currentProject')
+
+    .todo-list{ 'ui-sortable': 'tasks.sortableOptions', 'ng-model': 'projects.currentProject.tasks' }
+      .task-wrap{ 'ng-repeat': 'task in projects.currentProject.tasks' }
+        %tasks_item(ctrl='tasks' task='task' project='projects.currentProject')

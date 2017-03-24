@@ -1,0 +1,30 @@
+%md-content.task-content(flex='' ng_if='tasks.currentTask' ng_init='task = tasks.currentTask')
+
+  %md-button#back-task.md-button.md-ink-ripple(ui-sref='projects.detail({projectId: projects.currentProject.id})'
+    ng-click='projects.show({id: projects.currentProject.id})')
+    %md-icon keyboard_backspace
+    To project
+
+  %form#task-form.task-form(layout='column' layout_align='center center' name='editTaskForm')
+    %md-input-container.md-block.project-title.read-field(ng_class="{ 'write': editTaskForm.edited }")
+      %textarea#title-field.title(data_enter_event='tasks.edit(editTaskForm, task)'
+        aria-label='Title'
+        md-maxlength='100'
+        md-no-asterisk=''
+        required=''
+        name='title'
+        ng_model='task.title')
+
+      %span.hidden {{ task.title }}
+      %div.validators(ng_messages='editTaskForm.title.$error')
+        %div(ng_message='required') {{ 'validation.required' | translate }}
+        %div(ng_message='md-maxlength') {{ 'validation.max_length' | translate:{value: 100} }}
+
+    %md-actions.task-actions(layout='row' layout_align='center')
+      %md-button#edit-task.md-ink-ripple.md-icon-button.md-24(aria-label='edit task'
+        ng-click='tasks.edit(editTaskForm, task)')
+
+        %md-icon(ng_if='!editTaskForm.edited') edit
+        %md-icon(ng_if='editTaskForm.edited') done
+      %md-button#delete-task.md-button.md-ink-ripple.md-icon-button.md-24(ng-click='tasks.delete(task, projects.currentProject)')
+        %md-icon delete

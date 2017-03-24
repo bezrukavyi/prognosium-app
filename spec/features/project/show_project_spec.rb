@@ -22,5 +22,6 @@ feature 'Show project', type: :feature, js: true do
     expect(page).to have_no_css('.hidden', text: project.title)
     choose_project(project)
     check_hidden_title(project)
+    
   end
 end

@@ -1,6 +1,7 @@
 include Support::UserAuth
 include Support::CheckAttributes
 include Support::Projects
+include Support::Main
 
 feature 'Update project', type: :feature, js: true do
   let(:user) { create :user, :default_password }
@@ -15,7 +16,7 @@ feature 'Update project', type: :feature, js: true do
   scenario 'user can update title of project' do
     old_title = @project.title
     new_title = 'Rspec title'
-    update_project_title(new_title)
+    update_title(new_title, :project)
     expect(page).to have_content(new_title)
     expect(page).to have_no_content(old_title)
   end
@@ -30,7 +31,7 @@ feature 'Update project', type: :feature, js: true do
   end
 
   scenario 'user update title with invalid data' do
-    update_project_title('')
+    update_title('', :project)
     expect(page).to have_content(I18n.t('validation.required'))
   end
 end

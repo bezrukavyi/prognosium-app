@@ -22,7 +22,7 @@ module Support
       end
     end
 
-    def exist_hidden_value(value, exist)
+    def exist_hidden_value(value, exist = true)
       options = { text: value, visible: :hidden }
       if exist
         expect(page).to have_css('span.hidden', options)

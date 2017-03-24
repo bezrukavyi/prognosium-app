@@ -1,11 +1,11 @@
-%md-dialog(aria_label='Upload dialog' ng_controller='AttachmentController as attachmentCtrl')
+%md-dialog(aria-label='Upload dialog' ng_controller='AttachmentController as attachmentCtrl')
   %form(id="attachment-upload-{{ dialog.object.id }}" ng-cloak='' name='uploadForm')
     %md-toolbar
       .md-toolbar-tools(layout='row' layout_align='space-between center')
         %h2 {{ 'attachment.title' | translate:{name: dialog.object.title} }}
 
         %md-button.md-icon-button(ng-click='dialog.close()')
-          %md-icon(aria_label='Close dialog') close
+          %md-icon(aria-label='Close dialog') close
 
     %md-dialog-content
       %md-list(ng_show='!dialog.object.attachments.length')
@@ -16,7 +16,7 @@
           %md-button.md-primary(ng_if="attachment.file.type !== 'image'"
             ng_href='{{ attachment.file.url }}' target='_blank')
 
-            %md-icon(aria_label='Uploaded file') insert_drive_file
+            %md-icon(aria-label='Uploaded file') insert_drive_file
             %span {{ attachment.file.filename }}
 
           .uploaded-image.md-whiteframe-4dp(ng_if="attachment.file.type == 'image'"

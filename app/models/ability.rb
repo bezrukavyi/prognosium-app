@@ -6,5 +6,6 @@ class Ability
     user_id = user.id
 
     can :manage, Project, user_id: user_id
+    can :manage, Task, project: { user_id: user_id }
   end
 end
