@@ -82,13 +82,14 @@ describe Api::TasksController, type: :controller do
       Support::Command::InvalidFile.block_value = 'txt'
       post :create, params: params
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response['error']).to eq I18n.t('file.invalid', format: 'txt')
+      expect(parsed_response['error']).to eq I18n.t('file.invalid', value: 'txt')
     end
   end
 
   describe 'PATCH #update' do
     let(:valid_params) do
-      { id: @task.id, task: attributes_for(:task, title: 'New title') }
+      { id: @task.id, project_id: @task.project_id,
+        task: attributes_for(:task, title: 'New title') }
     end
 
     it 'returns a successful 200 response' do
@@ -101,7 +102,8 @@ describe Api::TasksController, type: :controller do
     end
     it 'when data invalid' do
       patch :update, params: { id: @task.id,
-                               task: attributes_for(:task, :invalid) }
+                               task: attributes_for(:task, :invalid),
+                               project_id: @task.project_id }
 
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['error']).not_to be_blank
@@ -126,15 +128,15 @@ describe Api::TasksController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'returns a successful 200 response' do
-      delete :destroy, params: { id: @task.id }
+      delete :destroy, params: { id: @task.id, project_id: @task.project_id }
       expect(response).to be_success
     end
     it 'destroy task' do
-      expect { delete :destroy, params: { id: @task.id } }
+      expect { delete :destroy, params: { id: @task.id, project_id: @task.project_id } }
         .to change { @tasks.reload.count }.by(-1)
     end
     it 'when data invalid' do
-      delete :destroy, params: { id: 100 }
+      delete :destroy, params: { id: 100, project_id: @task.project_id }
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['error']).not_to be_blank
     end

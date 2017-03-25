@@ -1,14 +1,17 @@
 require_relative 'projects_helper'
+require_relative 'wait_ajax_helper'
 
 module Support
   module Tasks
     include Projects
 
     def create_task(form_id, options)
+      file_path = "#{Rails.root}/spec/fixtures/#{options[:initial_data]}"
       within "##{form_id}" do
         fill_in 'title', with: options[:title]
+        attach_file 'file', file_path, visible: :hidden
       end
-      find('#create-task').click
+      wait_ajax
     end
 
     def delete_task(task = nil)

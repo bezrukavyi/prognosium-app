@@ -13,7 +13,8 @@ module Api
           render json: { error: task.errors.full_messages }
         end
         on(:invalid_file) do |file_format|
-          render json: { error: I18n.t('file.invalid', format: file_format) }
+          render json: { error: I18n.t('file.invalid', value: file_format) },
+                 status: :forbidden
         end
       end
     end

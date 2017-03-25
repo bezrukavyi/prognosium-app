@@ -1,6 +1,6 @@
 ru:
   app:
-    title: Angular ToDo
+    title: Прогнозиум
   project:
     default_title: Новый проект
     empty_title: Выберите проект или создайте новый
@@ -35,5 +35,7 @@ ru:
   validation:
     required: Это обязтельное поле
     max_length: Должно быть меньше чем %{value} символов
+  file:
+    invalid: Данный формат '%{value}' не поддерживается
   close: Закрыть
   remove: Удалить

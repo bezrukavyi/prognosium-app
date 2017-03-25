@@ -6,10 +6,10 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
   ctrl.taskId = $state.params.taskId
   ctrl.projectId = $state.params.projectId
 
-  ctrl.new = { project_id: null, title: null, checked: false }
+  ctrl.new = { project_id: null, title: null }
 
   ctrl.show = (options) ->
-    Task.nested.get(options).$promise.then (
+    Task.default.get(options).$promise.then (
       (response) ->
         ctrl.currentTask = response
       ), (response) ->
@@ -17,15 +17,16 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
         TodoToast.error(response.data.error)
         ctrl.toProject()
 
-  ctrl.create = (form, project) ->
-    return if form.$invalid || !Access.can('request')
+  ctrl.create = (form, project, file) ->
+    return if !file || form.$invalid || !Access.can('request')
     ctrl.new.project_id = project.id
     Access.lock('request')
-    Task.nested.create(ctrl.new).$promise.then (
+    Task.upload(ctrl.new, file).then (
       (response) ->
-        project.tasks.push(response)
+        project.tasks.push(response.data)
         ctrl.resetNew(form)
-        TodoToast.success(I18n.t('task.success.created', title: response.title))
+        ctrl.toTask(response.data)
+        TodoToast.success(I18n.t('task.success.created', title: response.data.title))
       ), (response) ->
         TodoToast.error(response.data.error)
 
@@ -43,7 +44,7 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
   ctrl.delete = (task, project) ->
     return unless Access.can('request')
     Access.lock('request')
-    Task.default.delete(id: task.id).$promise.then (
+    Task.default.delete(task).$promise.then (
       (response) ->
         index = project.tasks.indexOf($filter('filter')(project.tasks, id: task.id)[0])
         project.tasks.splice(index, 1) if (index != -1)
@@ -70,6 +71,13 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
 
   ctrl.toProject = () ->
     $state.go('projects.detail', $state.params)
+
+  ctrl.toTask = (data) ->
+    $state.go('projects.task', projectId: data.project_id, taskId: data.id)
+
+  # ctrl.upload = (form, task, file) ->
+  #   return unless file
+  #   for file, index in files
 
 
   return

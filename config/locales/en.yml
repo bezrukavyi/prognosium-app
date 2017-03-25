@@ -1,6 +1,6 @@
 en:
   app:
-    title: Angular ToDo
+    title: Prognosium
   project:
     default_title: New project
     empty_title: Choose project or create new
@@ -34,6 +34,8 @@ en:
     english: English
   validation:
     required: This is required
-    max_length: Must be less than %{value} characters long
+    max_length: Must be less than %{value}
+  file:
+    invalid: Invalid format '%{value}' for uploaded file
   close: Close
   remove: Remove

@@ -1,8 +1,11 @@
 AccessRequestInterceptors = (Access, $q) ->
-  response: (result) ->
+  response: (response) ->
     Access.request = true
+    response
 
-    result
+  responseError: (response) ->
+    Access.request = true
+    $q.reject(response)
 
 angular.module('toDoApp').config ($httpProvider) ->
   $httpProvider.interceptors.push(AccessRequestInterceptors)

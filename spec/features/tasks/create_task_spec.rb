@@ -14,11 +14,16 @@ feature 'Create task', type: :feature, js: true do
   end
 
   scenario 'user can create new task' do
-    attributes = attributes_for(:task)
+    attributes = attributes_for(:task, initial_data: 'files/test.xlsx')
     create_task('new-task-form', attributes)
-    expect(page).to have_content(I18n.t('task.success.created',
-                                        title: attributes[:title]))
+    expect(page).to have_content(I18n.t('task.success.created', title: attributes[:title]))
     check_hidden_title(Task.last)
+  end
+
+  scenario 'when user upload invalid file' do
+    attributes = attributes_for(:task, initial_data: 'files/test.txt')
+    create_task('new-task-form', attributes)
+    expect(page).to have_content(I18n.t('file.invalid', value: 'txt'))
   end
 
   scenario 'when user write invalid title' do
