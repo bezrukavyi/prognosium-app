@@ -35,13 +35,14 @@ class ParseSheetService
   def read_spreed_sheet
     spread_sheet = open_spreed_sheet
     header = spread_sheet.row(1)
-    table_value = (3..spread_sheet.last_row).map do |row_number|
+    table_values = (3..spread_sheet.last_row).map do |row_number|
       row = spread_sheet.row(row_number)
       [row[0], row[1]]
-    end
+    end.transpose
     { date_title: header[0],
       value_title: header[1],
-      values: table_value.compact.to_h }
+      dates: table_values[0],
+      values: table_values[1] }
   end
 
   def open_spreed_sheet

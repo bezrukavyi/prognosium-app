@@ -10,4 +10,5 @@ angular.module('toDoApp', [
   'tmh.dynamicLocale',
   'ngFileUpload',
   'ui.sortable',
+  'chart.js'
 ])

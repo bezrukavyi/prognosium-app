@@ -14,6 +14,9 @@
 //= require jquery-ui
 //= require angular-ui-sortable
 
+//= require chart.js.js
+//= require angular-chart.js.js
+
 //= require angular-translate
 //= require angular-translate-loader-static-files
 //= require angular-translate-storage-cookie

@@ -10,14 +10,18 @@ class SaveTask < Rectify::Command
   def call
     return broadcast(:invalid, task) unless task.valid?
     return broadcast(:invalid_file, data.file_extname) unless file_valid?
-    transaction do
-      set_initial_data
-      task.save
-    end
+    transactions
     broadcast(:valid)
   end
 
   private
+
+  def transactions
+    transaction do
+      set_initial_data
+      block_given? ? yield : task.save
+    end
+  end
 
   def file_valid?
     return true if file.blank?

@@ -11,6 +11,7 @@ en:
       deleted: "Project '%{title}' success deleted"
   task:
     new: New task
+    upload: Upload data
     success:
       created: "Task '%{title}' success created"
       deleted: "Task '%{title}' success deleted"
@@ -35,6 +36,9 @@ en:
   validation:
     required: This is required
     max_length: Must be less than %{value}
+  data:
+    dates: Dates
+    values: Values
   file:
     invalid: Invalid format '%{value}' for uploaded file
   close: Close

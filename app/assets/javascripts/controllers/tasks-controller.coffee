@@ -1,6 +1,7 @@
 TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
   ctrl = @
   ctrl.currentTask = null
+
   ctrl.editedTask = null
 
   ctrl.taskId = $state.params.taskId
@@ -21,7 +22,7 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
     return if !file || form.$invalid || !Access.can('request')
     ctrl.new.project_id = project.id
     Access.lock('request')
-    Task.upload(ctrl.new, file).then (
+    Task.upload(file, ctrl.new).then (
       (response) ->
         project.tasks.push(response.data)
         ctrl.resetNew(form)
@@ -53,6 +54,17 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
       ), (response) ->
         TodoToast.error(response.data.error)
 
+  ctrl.upload = (project, task, file) ->
+    return unless file && Access.can('request')
+    options = { project_id: project.id, id: task.id }
+    Access.lock('request')
+    Task.upload(file, options, 'put').then (
+      (response) ->
+        Object.assign(task, response.data)
+        TodoToast.success(I18n.t('data.success.updated'))
+      ), (response) ->
+        TodoToast.error(response.data.error)
+
   ctrl.resetNew = (form) ->
     form.$setPristine()
     form.$setUntouched()
@@ -74,11 +86,6 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
 
   ctrl.toTask = (data) ->
     $state.go('projects.task', projectId: data.project_id, taskId: data.id)
-
-  # ctrl.upload = (form, task, file) ->
-  #   return unless file
-  #   for file, index in files
-
 
   return
 

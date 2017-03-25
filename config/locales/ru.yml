@@ -11,6 +11,7 @@ ru:
       deleted: "Проект '%{title}' успешно удален"
   task:
     new: Новая задача
+    upload: Загрузить данные
     success:
       created: "Задача '%{title}' успешно создана"
       deleted: "Задача '%{title}' успешно удалена"
@@ -35,6 +36,9 @@ ru:
   validation:
     required: Это обязтельное поле
     max_length: Должно быть меньше чем %{value} символов
+  data:
+    dates: Даты
+    values: Значения
   file:
     invalid: Данный формат '%{value}' не поддерживается
   close: Закрыть

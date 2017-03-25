@@ -28,3 +28,29 @@
         %md-icon(ng_if='editTaskForm.edited') done
       %md-button#delete-task.md-button.md-ink-ripple.md-icon-button.md-24(ng-click='tasks.delete(task, projects.currentProject)')
         %md-icon delete
+
+    %md-button.md-raised.md-primary(layout='row'
+      aria-label='create task'
+      ngf-change='tasks.upload(projects.currentProject, tasks.currentTask, $file)'
+      ngf-select='')
+      {{ 'task.upload' | translate }}
+
+      %input.hidden(name='file' type='file'
+        ngf-change='tasks.upload(projects.currentProject, tasks.currentTask, $file)'
+        ngf-select='')
+
+  .data-content(layout='row' layout_align='space-between start')
+    .chart(flex='' layout='row')
+      %canvas#line.chart(class="chart chart-line"
+        chart-data="[task.initial_data.values]"
+        chart-labels="task.initial_data.dates")
+
+    %table.table
+      %thead
+        %tr
+          %th {{ 'data.dates' | translate }}
+          %th {{ 'data.values' | translate }}
+      %tbody
+        %tr(ng_repeat="date in task.initial_data.dates")
+          %td {{ date }}
+          %td {{ task.initial_data.values[$index] }}

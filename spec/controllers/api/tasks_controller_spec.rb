@@ -87,42 +87,43 @@ describe Api::TasksController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let(:valid_params) do
+    let(:params) do
       { id: @task.id, project_id: @task.project_id,
         task: attributes_for(:task, title: 'New title') }
     end
 
-    it 'returns a successful 200 response' do
-      patch :update, params: valid_params
+    before do
+      receive_cancan(:load_and_authorize, task: @task)
+    end
+
+    it 'SaveTask call' do
+      allow(controller).to receive(:params).and_return(params)
+      expect(UpdateTask).to receive(:call)
+      patch :update, params: params
+    end
+
+    it 'success response by valid command' do
+      stub_const('UpdateTask', Support::Command::Valid)
+      patch :update, params: params
       expect(response).to be_success
     end
-    it 'update task' do
-      expect { patch :update, params: valid_params }
-        .to change { @task.reload.attributes }
-    end
-    it 'when data invalid' do
-      patch :update, params: { id: @task.id,
-                               task: attributes_for(:task, :invalid),
-                               project_id: @task.project_id }
 
+    it 'error by invalid command' do
+      invalid_task = build :task, :invalid
+      invalid_task.save
+      stub_const('UpdateTask', Support::Command::Invalid)
+      Support::Command::Invalid.block_value = invalid_task
+      patch :update, params: params
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['error']).not_to be_blank
     end
 
-    context 'update position' do
-      before do
-        receive_cancan(:load_and_authorize, task: @task)
-      end
-      it 'when position doesnt changed' do
-        valid_params[:task][:position] = 100
-        expect(@task).to receive(:set_list_position).with(100)
-        patch :update, params: valid_params
-      end
-      it 'when position is changed' do
-        valid_params[:task][:position] = @task.position
-        expect(@task).not_to receive(:set_list_position)
-        patch :update, params: valid_params
-      end
+    it 'error by invalid_file command' do
+      stub_const('UpdateTask', Support::Command::InvalidFile)
+      Support::Command::InvalidFile.block_value = 'txt'
+      patch :update, params: params
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq I18n.t('file.invalid', value: 'txt')
     end
   end
 

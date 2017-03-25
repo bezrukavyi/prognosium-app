@@ -9,14 +9,10 @@ describe ParseSheetService, type: :service do
     it 'return json' do
       expect(@result).not_to be_blank
     end
-    it 'have date_title' do
-      expect(@result['date_title']).not_to be_nil
-    end
-    it 'have value_title' do
-      expect(@result['value_title']).not_to be_nil
-    end
-    it 'have values' do
-      expect(@result['values'].values.count).not_to be_zero
+    it 'have attributes' do
+      %w(date_title value_title dates values).each do |attribute|
+        expect(@result[attribute]).not_to be_nil
+      end
     end
   end
 

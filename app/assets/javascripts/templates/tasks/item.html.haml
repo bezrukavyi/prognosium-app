@@ -2,8 +2,7 @@
   .comment-task-wrap
     %md-card.todo-item-wrap
       %md-card-content.todo-item(layout='row'
-        layout_align='space-between center'
-        ng-class= "{ 'checked-task': task.checked }")
+        layout_align='space-between center')
 
         %form.task-edit(id='task-form-{{ task.id }}' flex='' name='editTaskForm')
           %md-input-container.md-block(ng-class="{ 'read-field': !editTaskForm.edited }")

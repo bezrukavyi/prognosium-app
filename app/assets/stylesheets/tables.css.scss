@@ -1,0 +1,43 @@
+.table {
+  table-layout: fixed;
+  border-spacing: 0;
+  border-bottom-color: transparent;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th:last-child,
+      > td:last-child  {
+        text-align: right;
+      }
+      > th,
+      > td {
+        text-align: left;
+        padding: 20px;
+      }
+      > td {
+        border-bottom: 1px solid grey;
+      }
+    }
+  }
+}
+
+.data-content {
+  padding: 0 5%;
+  .table {
+    margin-right: 30px;
+  }
+  .chart {
+    margin-bottom: 50px;
+  }
+}
+
+
+.data-content {
+  display: block;
+  .table {
+    margin: 0 auto;
+    margin-bottom: 50px;
+    width: 100%;
+  }
+}
