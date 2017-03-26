@@ -2,10 +2,10 @@ class CreateForecasts < ActiveRecord::Migration[5.0]
   def change
     create_table :forecasts do |t|
       t.json :initial_data
-      t.integer :alpha
-      t.integer :beta
+      t.float :alpha
+      t.float :beta
       t.integer :period
-      t.integer :type
+      t.integer :analysis_type
       t.references :task, foreign_key: true
 
       t.timestamps

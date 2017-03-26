@@ -1,0 +1,26 @@
+.forecast-form {
+  margin-right: 20px;
+}
+.forecast-form-container {
+  margin-bottom: 20px;
+  .types-select {
+    margin-bottom: 20px;
+  }
+}
+.forecast-patameters {
+  .md-block {
+    margin: 0;
+    flex-basis: 45%;
+  }
+}
+@media (max-width: 599px) {
+  .forecast-form-container {
+    flex-direction: column;
+  }
+  .forecast-form {
+    margin: 0 10px 20px 0;
+  }
+  .data-content {
+    width: 100%;
+  }
+}

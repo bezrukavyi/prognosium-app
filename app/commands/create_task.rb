@@ -35,8 +35,8 @@ class CreateTask < Rectify::Command
   end
 
   def forecast
-    @forecast = task.build_forecast
-    @forecast.initial_data = data.call if file.present?
-    @forecast
+    @forecast = task.build_forecast(initial_data: data.call,
+                                    period: Forecast::PERIOD,
+                                    alpha: Forecast::ALPHA)
   end
 end

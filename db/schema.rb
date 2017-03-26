@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 20170325221233) do
 
   create_table "forecasts", force: :cascade do |t|
     t.json     "initial_data"
-    t.integer  "alpha"
-    t.integer  "beta"
+    t.float    "alpha"
+    t.float    "beta"
     t.integer  "period"
-    t.integer  "type"
+    t.integer  "analysis_type"
     t.integer  "task_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["task_id"], name: "index_forecasts_on_task_id", using: :btree
   end
 

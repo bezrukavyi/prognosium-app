@@ -1,0 +1,9 @@
+%table.table
+  %thead
+    %tr
+      %th {{ 'data.dates' | translate }}
+      %th {{ 'data.values' | translate }}
+  %tbody
+    %tr(ng_repeat="date in forecast.initial_data.dates")
+      %td {{ date }}
+      %td {{ forecast.initial_data.values[$index] }}

@@ -1,0 +1,5 @@
+.data-content(layout='row' layout_align='space-between start')
+  .chart(flex='' layout='row')
+    %canvas#line.chart(class="chart chart-line"
+      chart-data="[forecast.initial_data.values]"
+      chart-labels="forecast.initial_data.dates")

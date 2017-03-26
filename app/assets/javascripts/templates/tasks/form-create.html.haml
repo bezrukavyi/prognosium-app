@@ -15,15 +15,23 @@
       %div(ng_message='required') {{ 'validation.required' | translate }}
       %div(ng_message='md-maxlength') {{ 'validation.max_length' | translate:{value: 100} }}
 
-  %md-button.md-raised.md-primary(layout='row'
+  %md-button.md-raised.md-primary#create-task(hide-xs=''
+    type='submit'
+    layout='row'
+    layout_align='center'
     aria-label='create task'
     ngf-change='taskForm.$setSubmitted(); ctrl.create(taskForm, project, $file)'
     ngf-select='')
     {{ 'task.new' | translate }}
 
+  %md-button.md-icon-button.md-button.md-ink-ripple.md-primary.md-24(hide-gt-xs=''
+    type='submit'
+    layout='row'
+    aria-label='create task'
+    ngf-change='taskForm.$setSubmitted(); ctrl.create(taskForm, project, $file)'
+    ngf-select='')
+    %md-icon add
+
     %input.hidden(name='file' type='file'
       ngf-change='taskForm.$setSubmitted(); ctrl.create(taskForm, project, $file)'
       ngf-select='')
-
-  %md-button.md-icon-button.md-button.md-ink-ripple.md-primary.md-24(hide-gt-xs='' type='submit')
-    %md-icon add

@@ -15,6 +15,15 @@ en:
     success:
       created: "Task '%{title}' success created"
       deleted: "Task '%{title}' success deleted"
+  forecast:
+    alpha: Alpha
+    beta: Beta
+    period: Forecast period
+    upload: Upload
+    update: Update
+    methods:
+      brown: Brown's method
+      holt: Holt's method
   auth:
     email: Email
     password: Password

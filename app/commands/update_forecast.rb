@@ -22,7 +22,7 @@ class UpdateForecast < Rectify::Command
   end
 
   def data_valid?
-    return false if file.blank?
+    return true if file.blank?
     data.valid?
   end
 
@@ -35,6 +35,6 @@ class UpdateForecast < Rectify::Command
   end
 
   def forecast_params
-    params.require(:forecast).permit(:alpha, :beta, :period, :task_id)
+    params.require(:forecast).permit(:alpha, :beta, :period, :analysis_type, :task_id)
   end
 end

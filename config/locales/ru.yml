@@ -15,6 +15,12 @@ ru:
     success:
       created: "Задача '%{title}' успешно создана"
       deleted: "Задача '%{title}' успешно удалена"
+  forecast:
+    alpha: Альфа
+    beta: Бета
+    period: Период прогноза
+    upload: Загрузить
+    update: Обновить
   auth:
     email: Эл. почта
     password: Пароль

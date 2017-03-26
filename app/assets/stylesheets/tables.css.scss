@@ -23,21 +23,12 @@
 }
 
 .data-content {
-  padding: 0 5%;
-  .table {
-    margin-right: 30px;
-  }
-  .chart {
-    margin-bottom: 50px;
-  }
-}
-
-
-.data-content {
   display: block;
   .table {
     margin: 0 auto;
     margin-bottom: 50px;
-    width: 100%;
   }
+}
+.forecast-table {
+  width: 100%;
 }

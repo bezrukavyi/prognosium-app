@@ -23,8 +23,26 @@ feature 'Manage forecast', type: :feature, js: true do
 
   scenario 'user can upload new data' do
     go_to_task(@task)
+    info = attributes_for(:forecast, analysis_type: :holt)
+    fill_forecast_params('forecast-form', info)
     new_data = upload_forecast_data('forecast-form', 'files/new_data.xlsx')
     expect(page).to have_content(I18n.t('data.success.updated'))
+    check_forecast_info(info)
     check_forecast_data(new_data)
+  end
+
+  scenario 'user can update analysis' do
+    go_to_task(@task)
+    info = attributes_for(:forecast, analysis_type: :holt)
+    update_forecast_analysis('forecast-form', info)
+    expect(page).to have_content(I18n.t('data.success.updated'))
+    check_forecast_info(info)
+  end
+
+  scenario 'when user fill invalid analysis params' do
+    go_to_task(@task)
+    info = attributes_for(:forecast, period: nil)
+    fill_forecast_params('forecast-form', info)
+    expect(page).to have_content(I18n.t('validation.required'))
   end
 end

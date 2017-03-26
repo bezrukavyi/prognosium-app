@@ -2,18 +2,19 @@ ForecastsController = (Forecast, TodoToast, I18n, Access, $state, $filter) ->
   ctrl = @
 
   ctrl.update = (form, forecast) ->
-    return if form.$invalid
+    return if form.$invalid || !Access.can('request')
+    Access.lock('request')
     Forecast.default.update(forecast).$promise.then (
       (response) ->
-        Object.assign(task, response)
+        Object.assign(forecast, response)
+        TodoToast.success(I18n.t('data.success.updated'))
       ), (response) ->
         TodoToast.error(response.data.error)
 
-  ctrl.upload = (task, forecast, file) ->
-    return unless file && Access.can('request')
-    options = { task_id: task.id, id: forecast.id }
+  ctrl.upload = (form, forecast, file) ->
+    return if !file || form.$invalid || !Access.can('request')
     Access.lock('request')
-    Forecast.upload(file, options, 'put').then (
+    Forecast.upload(file, forecast, 'put').then (
       (response) ->
         Object.assign(forecast, response.data)
         TodoToast.success(I18n.t('data.success.updated'))

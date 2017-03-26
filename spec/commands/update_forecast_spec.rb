@@ -1,8 +1,8 @@
 describe UpdateForecast, type: :command do
   let(:forecast) { create :forecast }
   let(:params) do
-    { forecast: attributes_for(:forecast),
-      file: fixture_file_upload('/files/test.xlsx') }
+    { forecast: attributes_for(:forecast, :without_initial_data),
+      file: fixture_file_upload('/files/new_data.xlsx') }
   end
 
   describe '#call' do
@@ -21,11 +21,12 @@ describe UpdateForecast, type: :command do
       end
     end
 
-    # it 'invalid' do
-    #   forecast.title = nil
-    #   subject = UpdateForecast.new(forecast, params)
-    #   expect { subject.call }.to broadcast(:invalid)
-    # end
+    it 'invalid' do
+      params[:forecast][:period] = nil
+      subject = UpdateForecast.new(forecast, params)
+      allow(subject).to receive(:forecast_params).and_return(params[:forecast])
+      expect { subject.call }.to broadcast(:invalid)
+    end
 
     it 'invalid_file' do
       params[:file] = fixture_file_upload('/files/test.txt')

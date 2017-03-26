@@ -40,14 +40,14 @@ describe Api::ForecastsController, type: :controller do
       expect(parsed_response['error']).to eq I18n.t('file.invalid', value: 'txt')
     end
 
-    # it 'error by invalid command' do
-    #   invalid_forecast = build :forecast, :invalid
-    #   invalid_forecast.save
-    #   stub_const('UpdateForecast', Support::Command::Invalid)
-    #   Support::Command::Invalid.block_value = invalid_forecast
-    #   patch :update, params: params
-    #   parsed_response = JSON.parse(response.body)
-    #   expect(parsed_response['error']).not_to be_blank
-    # end
+    it 'error by invalid command' do
+      invalid_forecast = build :forecast, :invalid
+      invalid_forecast.save
+      stub_const('UpdateForecast', Support::Command::Invalid)
+      Support::Command::Invalid.block_value = invalid_forecast
+      patch :update, params: params
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).not_to be_blank
+    end
   end
 end

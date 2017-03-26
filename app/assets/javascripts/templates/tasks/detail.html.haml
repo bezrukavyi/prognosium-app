@@ -1,4 +1,4 @@
-%md-content.task-content(flex='' ng_if='tasks.currentTask' ng_init='task = tasks.currentTask')
+%md-content.task-content.wrap(flex='' ng_if='tasks.currentTask' ng_init='task = tasks.currentTask')
 
   %md-button#back-task.md-button.md-ink-ripple(ui-sref='projects.detail({projectId: projects.currentProject.id})'
     ng-click='projects.show({id: projects.currentProject.id})')
@@ -30,6 +30,6 @@
         %md-icon delete
 
 
-  %div(ng-controller='ForecastsController as forecasts')
-    %forecasts_form(layout='row' layout_align='center center' ctrl='forecasts' forecast='task.forecast' task='task')
-    %forecasts_detail(ctrl='forecasts' forecast='task.forecast')
+  %div(flex='' ng-controller='ForecastsController as forecasts')
+    %forecasts_form(ctrl='forecasts' forecast='task.forecast' task='task')
+    %forecasts_table.forecast-table(ctrl='forecasts' forecast='task.forecast')
