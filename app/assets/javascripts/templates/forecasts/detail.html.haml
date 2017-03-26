@@ -1,0 +1,15 @@
+.data-content(layout='row' layout_align='space-between start')
+  .chart(flex='' layout='row')
+    %canvas#line.chart(class="chart chart-line"
+      chart-data="[forecast.initial_data.values]"
+      chart-labels="forecast.initial_data.dates")
+
+  %table.table
+    %thead
+      %tr
+        %th {{ 'data.dates' | translate }}
+        %th {{ 'data.values' | translate }}
+    %tbody
+      %tr(ng_repeat="date in forecast.initial_data.dates")
+        %td {{ date }}
+        %td {{ forecast.initial_data.values[$index] }}

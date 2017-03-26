@@ -1,15 +1,22 @@
-class UpdateTask < SaveTask
+class UpdateTask < Rectify::Command
+  attr_reader :task, :params
+
+  def initialize(task, params)
+    @task = task
+    @params = params
+  end
+
+  def call
+    transactions ? broadcast(:valid) : broadcast(:invalid, task)
+  end
+
   private
 
   def transactions
-    super do
+    transaction do
       change_position
       task.update_attributes(task_params)
     end
-  end
-
-  def save_task
-    task.update_attributes(task_params)
   end
 
   def change_position

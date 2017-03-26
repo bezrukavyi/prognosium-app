@@ -5,7 +5,6 @@ FactoryGirl.define do
     title { FFaker::Job.title }
     comment "MyString"
     project
-    initial_data nil
   end
 
   trait :invalid do

@@ -10,7 +10,7 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
   ctrl.new = { project_id: null, title: null }
 
   ctrl.show = (options) ->
-    Task.default.get(options).$promise.then (
+    Task.nested.get(options).$promise.then (
       (response) ->
         ctrl.currentTask = response
       ), (response) ->
@@ -38,9 +38,11 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
 
   ctrl.update = (form, task) ->
     return if form.$invalid
-    Task.default.update(task).$promise.then(null, (response) ->
-      TodoToast.error(response.data.error)
-    )
+    Task.default.update(task).$promise.then (
+      (response) ->
+        Object.assign(task, response)
+      ), (response) ->
+        TodoToast.error(response.data.error)
 
   ctrl.delete = (task, project) ->
     return unless Access.can('request')
@@ -54,16 +56,16 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
       ), (response) ->
         TodoToast.error(response.data.error)
 
-  ctrl.upload = (project, task, file) ->
-    return unless file && Access.can('request')
-    options = { project_id: project.id, id: task.id }
-    Access.lock('request')
-    Task.upload(file, options, 'put').then (
-      (response) ->
-        Object.assign(task, response.data)
-        TodoToast.success(I18n.t('data.success.updated'))
-      ), (response) ->
-        TodoToast.error(response.data.error)
+  # ctrl.upload = (project, task, file) ->
+  #   return unless file && Access.can('request')
+  #   options = { project_id: project.id, id: task.id }
+  #   Access.lock('request')
+  #   Task.upload(file, options, 'put').then (
+  #     (response) ->
+  #       Object.assign(task, response.data)
+  #       TodoToast.success(I18n.t('data.success.updated'))
+  #     ), (response) ->
+  #       TodoToast.error(response.data.error)
 
   ctrl.resetNew = (form) ->
     form.$setPristine()

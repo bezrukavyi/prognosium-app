@@ -3,11 +3,11 @@ module Api
     load_and_authorize_resource
 
     def show
-      render json: @task
+      render json: @task, serializer: DetailTaskSerializer
     end
 
     def create
-      SaveTask.call(@task, params) do
+      CreateTask.call(@task, params) do
         on(:valid) { render json: @task }
         on(:invalid) { |task| render json: { error: task.errors.full_messages } }
         on(:invalid_file) do |file_format|
@@ -20,9 +20,6 @@ module Api
       UpdateTask.call(@task, params) do
         on(:valid) { render json: @task }
         on(:invalid) { |task| render json: { error: task.errors.full_messages } }
-        on(:invalid_file) do |file_format|
-          render json: { error: I18n.t('file.invalid', value: file_format) }, status: :forbidden
-        end
       end
     end
 

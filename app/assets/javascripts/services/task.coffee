@@ -1,16 +1,17 @@
 Task = ($resource, Upload) ->
-  upload: (file, params, method = 'post') ->
+  upload: (file, params) ->
     params.id ||= ''
     Upload.upload(
       url: "/api/projects/#{params.project_id}/tasks/#{params.id}",
-      data: { file: file, 'task': params },
-      method: method)
+      data: { file: file, 'task': params })
 
-  default: $resource '/api/projects/:project_id/tasks/:id', { project_id: '@project_id', id: '@id' },
+  nested: $resource '/api/projects/:project_id/tasks/:id', { project_id: '@project_id', id: '@id' },
     show:
       method: 'GET'
     create:
       method: 'POST'
+
+  default: $resource '/api/tasks/:id', { id: '@id' },
     update:
       method: 'PATCH'
     delete:

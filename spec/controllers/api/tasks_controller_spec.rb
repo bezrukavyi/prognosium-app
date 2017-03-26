@@ -55,14 +55,14 @@ describe Api::TasksController, type: :controller do
       receive_cancan(:load_and_authorize, task: @task)
     end
 
-    it 'SaveTask call' do
+    it 'CreateTask call' do
       allow(controller).to receive(:params).and_return(params)
-      expect(SaveTask).to receive(:call)
+      expect(CreateTask).to receive(:call)
       post :create, params: params
     end
 
     it 'success response by valid command' do
-      stub_const('SaveTask', Support::Command::Valid)
+      stub_const('CreateTask', Support::Command::Valid)
       post :create, params: params
       expect(response).to be_success
     end
@@ -70,7 +70,7 @@ describe Api::TasksController, type: :controller do
     it 'error by invalid command' do
       invalid_task = build :task, :invalid
       invalid_task.save
-      stub_const('SaveTask', Support::Command::Invalid)
+      stub_const('CreateTask', Support::Command::Invalid)
       Support::Command::Invalid.block_value = invalid_task
       post :create, params: params
       parsed_response = JSON.parse(response.body)
@@ -78,7 +78,7 @@ describe Api::TasksController, type: :controller do
     end
 
     it 'error by invalid_file command' do
-      stub_const('SaveTask', Support::Command::InvalidFile)
+      stub_const('CreateTask', Support::Command::InvalidFile)
       Support::Command::InvalidFile.block_value = 'txt'
       post :create, params: params
       parsed_response = JSON.parse(response.body)
@@ -88,15 +88,14 @@ describe Api::TasksController, type: :controller do
 
   describe 'PATCH #update' do
     let(:params) do
-      { id: @task.id, project_id: @task.project_id,
-        task: attributes_for(:task, title: 'New title') }
+      { id: @task.id, task: attributes_for(:task, title: 'New title') }
     end
 
     before do
       receive_cancan(:load_and_authorize, task: @task)
     end
 
-    it 'SaveTask call' do
+    it 'CreateTask call' do
       allow(controller).to receive(:params).and_return(params)
       expect(UpdateTask).to receive(:call)
       patch :update, params: params
@@ -117,27 +116,19 @@ describe Api::TasksController, type: :controller do
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['error']).not_to be_blank
     end
-
-    it 'error by invalid_file command' do
-      stub_const('UpdateTask', Support::Command::InvalidFile)
-      Support::Command::InvalidFile.block_value = 'txt'
-      patch :update, params: params
-      parsed_response = JSON.parse(response.body)
-      expect(parsed_response['error']).to eq I18n.t('file.invalid', value: 'txt')
-    end
   end
 
   describe 'DELETE #destroy' do
     it 'returns a successful 200 response' do
-      delete :destroy, params: { id: @task.id, project_id: @task.project_id }
+      delete :destroy, params: { id: @task.id }
       expect(response).to be_success
     end
     it 'destroy task' do
-      expect { delete :destroy, params: { id: @task.id, project_id: @task.project_id } }
+      expect { delete :destroy, params: { id: @task.id } }
         .to change { @tasks.reload.count }.by(-1)
     end
     it 'when data invalid' do
-      delete :destroy, params: { id: 100, project_id: @task.project_id }
+      delete :destroy, params: { id: 100 }
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['error']).not_to be_blank
     end

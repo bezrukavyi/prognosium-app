@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324105433) do
+ActiveRecord::Schema.define(version: 20170325221233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forecasts", force: :cascade do |t|
+    t.json     "initial_data"
+    t.integer  "alpha"
+    t.integer  "beta"
+    t.integer  "period"
+    t.integer  "type"
+    t.integer  "task_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["task_id"], name: "index_forecasts_on_task_id", using: :btree
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -29,9 +41,8 @@ ActiveRecord::Schema.define(version: 20170324105433) do
     t.string   "comment"
     t.integer  "position"
     t.integer  "project_id"
-    t.json     "initial_data", default: []
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 
@@ -64,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170324105433) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "forecasts", "tasks"
   add_foreign_key "projects", "users"
   add_foreign_key "tasks", "projects"
 end

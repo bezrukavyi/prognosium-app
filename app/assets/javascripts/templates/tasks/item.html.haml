@@ -21,15 +21,15 @@
               %div(ng_message='md-maxlength') The title must be less than 100 characters long.
 
         %md-actions.todo-actions
-          %md-button.md-icon-button.md-ink-ripple.md-18(id='edit-task-{{task.id}}'
+          %md-button.md-icon-button.md-ink-ripple.md-20(id='edit-task-{{task.id}}'
             aria-label='edit task' ng-click='ctrl.edit(editTaskForm, task)')
 
             %md-icon(ng_if='!editTaskForm.edited') edit
             %md-icon(ng_if='editTaskForm.edited') done
-          %md-button.md-icon-button.md-button.md-ink-ripple.md-18(id='delete-task-{{task.id}}'
+          %md-button.md-icon-button.md-button.md-ink-ripple.md-20(id='delete-task-{{task.id}}'
             ng-click='ctrl.delete(task, project)')
             %md-icon delete
-          %md-button.md-icon-button.md-button.md-ink-ripple.md-18(id='show-task-{{task.id}}'
+          %md-button.md-icon-button.md-button.md-ink-ripple.md-20(id='show-task-{{task.id}}'
             ui-sref='projects.task({taskId: task.id, projectId: project.id})'
             ng-click='ctrl.show(task)')
             %md-icon poll
