@@ -39,6 +39,8 @@ ru:
   data:
     dates: Даты
     values: Значения
+    success:
+      updated: Данные успешно обновлены
   file:
     invalid: Данный формат '%{value}' не поддерживается
   close: Закрыть

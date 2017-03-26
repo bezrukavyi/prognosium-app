@@ -5,6 +5,11 @@ module Support
   module Tasks
     include Projects
 
+    def go_to_task(task)
+      visit "projects/#{task.project.id}/tasks/#{task.id}"
+      wait_ajax
+    end
+
     def create_task(form_id, options)
       file_path = "#{Rails.root}/spec/fixtures/#{options[:initial_data]}"
       within "##{form_id}" do

@@ -39,6 +39,8 @@ en:
   data:
     dates: Dates
     values: Values
+    success:
+      updated: Data success updated
   file:
     invalid: Invalid format '%{value}' for uploaded file
   close: Close

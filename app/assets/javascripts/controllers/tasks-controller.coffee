@@ -56,17 +56,6 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
       ), (response) ->
         TodoToast.error(response.data.error)
 
-  # ctrl.upload = (project, task, file) ->
-  #   return unless file && Access.can('request')
-  #   options = { project_id: project.id, id: task.id }
-  #   Access.lock('request')
-  #   Task.upload(file, options, 'put').then (
-  #     (response) ->
-  #       Object.assign(task, response.data)
-  #       TodoToast.success(I18n.t('data.success.updated'))
-  #     ), (response) ->
-  #       TodoToast.error(response.data.error)
-
   ctrl.resetNew = (form) ->
     form.$setPristine()
     form.$setUntouched()

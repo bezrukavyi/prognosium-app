@@ -1,10 +1,10 @@
-.forecast-form
+%form#forecast-form.forecast-form
   %md-button.md-raised.md-primary(layout='row'
-    aria-label='update forecast'
+    aria-label='upload forecast'
     ngf-change='ctrl.upload(task, forecast, $file)'
     ngf-select='')
     {{ 'task.upload' | translate }}
 
     %input.hidden(name='file' type='file'
-      ngf-change='tasks.upload(task, forecast, $file)'
+      ngf-change='ctrl.upload(task, forecast, $file)'
       ngf-select='')
