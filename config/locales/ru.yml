@@ -21,6 +21,12 @@ ru:
     period: Период прогноза
     upload: Загрузить
     update: Обновить
+    analysed: Прогноз
+    deviation_errors: Ошибка отклонения
+    error_percent: Средняя ошибка отклонения
+    methods:
+      brown: Метод Брауна
+      holt: Метод Холта
   auth:
     email: Эл. почта
     password: Пароль

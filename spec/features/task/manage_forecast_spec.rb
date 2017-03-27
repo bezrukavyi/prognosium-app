@@ -35,8 +35,8 @@ feature 'Manage forecast', type: :feature, js: true do
     go_to_task(@task)
     info = attributes_for(:forecast, analysis_type: :holt)
     update_forecast_analysis('forecast-form', info)
-    expect(page).to have_content(I18n.t('data.success.updated'))
     check_forecast_info(info)
+    check_forecast_data(@forecast)
   end
 
   scenario 'when user fill invalid analysis params' do

@@ -2,8 +2,11 @@
   margin-right: 20px;
 }
 .forecast-form-container {
-  margin-bottom: 20px;
+  margin-bottom: 100px;
   .types-select {
+    margin-bottom: 20px;
+  }
+  .chart {
     margin-bottom: 20px;
   }
 }
@@ -18,7 +21,7 @@
     flex-direction: column;
   }
   .forecast-form {
-    margin: 0 10px 20px 0;
+    margin: 0 0 20px 0;
   }
   .data-content {
     width: 100%;

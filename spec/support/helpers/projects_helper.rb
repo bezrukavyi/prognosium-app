@@ -27,7 +27,7 @@ module Support
 
     def completed_at_project(project, time)
       find('#deadline-project').click
-      find("[id*='#{time.year}-#{time.month - 1}-#{time.day}']").click
+      first("[id*='#{time.year}-#{time.month - 1}-#{time.day}']").click
     end
 
     def check_completed_at(date, exist = true)

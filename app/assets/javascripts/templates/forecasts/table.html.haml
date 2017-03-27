@@ -1,9 +1,13 @@
 %table.table
   %thead
     %tr
-      %th {{ 'data.dates' | translate }}
-      %th {{ 'data.values' | translate }}
+      %th {{ forecast.initial_data.date_title }}
+      %th {{ forecast.initial_data.value_title }}
+      %th {{ 'forecast.analysed' | translate }}
+      %th {{ 'forecast.deviation_errors' | translate }}
   %tbody
-    %tr(ng_repeat="date in forecast.initial_data.dates")
+    %tr(ng_repeat="date in forecast.forecast_dates")
       %td {{ date }}
       %td {{ forecast.initial_data.values[$index] }}
+      %td {{ forecast.analysed_data[$index] }}
+      %td {{ forecast.deviation_errors[$index] }}

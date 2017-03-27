@@ -21,6 +21,9 @@ en:
     period: Forecast period
     upload: Upload
     update: Update
+    analysed: Forecast
+    deviation_errors: Deviation Error
+    error_percent: Average Percent Error
     methods:
       brown: Brown's method
       holt: Holt's method

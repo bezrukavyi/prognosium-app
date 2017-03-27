@@ -6,8 +6,9 @@ ForecastsController = (Forecast, TodoToast, I18n, Access, $state, $filter) ->
     Access.lock('request')
     Forecast.default.update(forecast).$promise.then (
       (response) ->
-        Object.assign(forecast, response.data)
-        TodoToast.success(I18n.t('data.success.updated'))
+        delete response.$promise
+        delete response.$resolved
+        Object.assign(forecast, response)
       ), (response) ->
         TodoToast.error(response.data.error)
 

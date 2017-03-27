@@ -35,7 +35,7 @@ class ParseSheetService
   def read_spreed_sheet
     spread_sheet = open_spreed_sheet
     header = spread_sheet.row(1)
-    table_values = (3..spread_sheet.last_row).map do |row_number|
+    table_values = (2..spread_sheet.last_row).map do |row_number|
       row = spread_sheet.row(row_number)
       [row[0], row[1]]
     end.transpose
