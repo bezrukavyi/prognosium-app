@@ -18,6 +18,7 @@ ru:
   forecast:
     alpha: Альфа
     beta: Бета
+    fi: Фи
     period: Период прогноза
     upload: Загрузить
     update: Обновить
@@ -28,6 +29,7 @@ ru:
     methods:
       brown: Метод Брауна
       holt: Метод Холта
+      mc_kanzey: Метод Гарднера Маккензи
   auth:
     email: Эл. почта
     password: Пароль

@@ -18,6 +18,7 @@ en:
   forecast:
     alpha: Alpha
     beta: Beta
+    fi: Fi
     period: Forecast period
     upload: Upload
     update: Update
@@ -28,6 +29,7 @@ en:
     methods:
       brown: Brown's method
       holt: Holt's method
+      mc_kanzey: Gardner-McKanzey's method
   auth:
     email: Email
     password: Password

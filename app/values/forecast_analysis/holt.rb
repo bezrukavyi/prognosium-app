@@ -48,8 +48,12 @@ module ForecastAnalysis
     def calc_predicted_values
       calc_trend_smoothed
       super do |index|
-        smoothed.last + trend.last * index
+        predicted_formula(index)
       end
+    end
+
+    def predicted_formula(index)
+      smoothed.last + trend.last * index
     end
   end
 end

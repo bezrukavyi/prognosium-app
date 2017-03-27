@@ -1,10 +1,11 @@
 class Forecast < ApplicationRecord
-  enum analysis_type: [:brown, :holt]
+  enum analysis_type: [:brown, :holt, :mc_kanzey]
 
   TYPES = analysis_types.keys
 
   ALPHA = 0.3
   BETA = 0.8
+  FI = 0.95
   PERIOD = 3
 
   belongs_to :task
@@ -14,7 +15,7 @@ class Forecast < ApplicationRecord
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 5
   }
-  validates :alpha, presence: true, numericality: {
+  validates :alpha, :beta, :fi, presence: true, numericality: {
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 1
   }
@@ -31,8 +32,8 @@ class Forecast < ApplicationRecord
   end
 
   def analysis
-    options = { alpha: alpha, beta: beta, period: period, type: analysis_type,
-                data: parsed_initial_data['values'] }
+    options = { alpha: alpha, beta: beta, fi: fi, period: period,
+                type: analysis_type, data: parsed_initial_data['values'] }
     @analysis ||= ForecastAnalysis::Dispatcher.new(options)
   end
 

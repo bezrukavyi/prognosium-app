@@ -15,7 +15,7 @@ module Api
     private
 
     def forecast_params
-      params.require(:forecast).permit(:alpha, :beta, :period, :analysis_type, :task_id)
+      params.require(:forecast).permit(:alpha, :beta, :fi, :period, :analysis_type, :task_id)
     end
   end
 end

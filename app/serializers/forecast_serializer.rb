@@ -1,5 +1,5 @@
 class ForecastSerializer < ActiveModel::Serializer
-  attributes :id, :initial_data, :alpha, :beta, :period, :analysis_type,
+  attributes :id, :initial_data, :alpha, :beta, :fi, :period, :analysis_type,
              :support_types, :analysed_data, :deviation_errors, :error_percent,
              :forecast_dates
 

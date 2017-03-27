@@ -16,6 +16,7 @@ module Support
         fill_in 'period', with: options[:period]
         fill_in 'alpha', with: options[:alpha]
         fill_in 'beta', with: options[:beta]
+        fill_in 'fi', with: options[:fi]
       end
       choose_analysis_type(options[:analysis_type])
     end
