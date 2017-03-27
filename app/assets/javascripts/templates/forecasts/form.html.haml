@@ -6,9 +6,9 @@
 
       %md-content(flex='')
         %md-input-container.md-block
-          %label {{ 'forecast.types' | translate }}
+          %label {{ 'forecast.type' | translate }}
           %md-select.types-select(required='' ng-model='forecast.analysis_type')
-            %md-option.type-option(id="select-{{key}}" ng-repeat="(key, type) in forecast.support_types" ng-value='key') {{ type }}
+            %md-option.type-option(id="select-{{type}}" ng-repeat="type in forecast.support_types" ng-value='type') {{ 'forecast.methods.' + type | translate }}
 
         %md-input-container.md-block
           %label {{ 'forecast.period' | translate }}

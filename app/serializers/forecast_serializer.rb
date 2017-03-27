@@ -4,8 +4,7 @@ class ForecastSerializer < ActiveModel::Serializer
              :forecast_dates
 
   def support_types
-    types = Forecast::TYPES
-    types.map { |type| [type, I18n.t("forecast.methods.#{type}")] }.to_h
+    Forecast::TYPES
   end
 
   def initial_data

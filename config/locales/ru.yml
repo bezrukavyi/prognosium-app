@@ -22,6 +22,7 @@ ru:
     upload: Загрузить
     update: Обновить
     analysed: Прогноз
+    type: Метод Прогнозирования
     deviation_errors: Ошибка отклонения
     error_percent: Средняя ошибка отклонения
     methods:
