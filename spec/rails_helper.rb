@@ -11,6 +11,7 @@ require 'capybara/rspec'
 require 'capybara/email/rspec'
 require 'capybara-screenshot/rspec'
 require 'rectify/rspec'
+require 'with_model'
 
 %w(support).each do |folder|
   Dir[Rails.root.join("spec/#{folder}/**/*.rb")].each do |component|
@@ -27,6 +28,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include Support::WaitAjax
   config.include Rectify::RSpec::Helpers
+  config.extend WithModel
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

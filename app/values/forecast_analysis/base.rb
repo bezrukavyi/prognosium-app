@@ -1,5 +1,12 @@
 module ForecastAnalysis
   class Base
+    attr_reader :dependencies_params
+
+    def initialize(options, reqired_params)
+      reqired_params.each { |param| send("#{param}=", options[param]) }
+      @data = options[:data]
+    end
+
     def forecast
       @forecast ||= calc_forecast
       @forecast.compact
@@ -23,6 +30,11 @@ module ForecastAnalysis
 
     def predicted_values
       @predicted_values ||= round_data(calc_predicted_values)
+    end
+
+    def forecast_dates(dates)
+      period.times { |index| dates << (index + 1).to_s }
+      dates
     end
 
     private

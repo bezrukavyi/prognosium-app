@@ -21,28 +21,34 @@ feature 'Manage forecast', type: :feature, js: true do
     check_forecast_data(@forecast)
   end
 
-  scenario 'user can upload new data' do
+  scenario 'user can upload new data by all forecast types' do
     go_to_task(@task)
-    info = attributes_for(:forecast, analysis_type: :holt)
-    fill_forecast_params('forecast-form', info)
-    new_data = upload_forecast_data('forecast-form', 'files/new_data.xlsx')
-    expect(page).to have_content(I18n.t('data.success.updated'))
-    check_forecast_info(info)
-    check_forecast_data(new_data)
+    Forecast::TYPES.each_with_index do |type, index|
+      info = attributes_for(:forecast, type.to_sym)
+      fill_forecast_params('forecast-form', info)
+      new_data = upload_forecast_data('forecast-form', "files/test_#{index}.xlsx")
+      expect(page).to have_content(I18n.t('data.success.updated'))
+      check_forecast_info(info)
+      check_forecast_data(new_data)
+    end
   end
 
   scenario 'user can update analysis' do
     go_to_task(@task)
-    info = attributes_for(:forecast, analysis_type: :holt)
-    update_forecast_analysis('forecast-form', info)
-    check_forecast_info(info)
-    check_forecast_data(@forecast)
+    Forecast::TYPES.each do |type|
+      info = attributes_for(:forecast, type.to_sym)
+      update_forecast_analysis('forecast-form', info)
+      check_forecast_info(info)
+      check_forecast_data(@forecast)
+    end
   end
 
   scenario 'when user fill invalid analysis params' do
     go_to_task(@task)
-    info = attributes_for(:forecast, period: nil)
-    fill_forecast_params('forecast-form', info)
-    expect(page).to have_content(I18n.t('validation.required'))
+    [:period, :beta, :alpha].each do |attribute|
+      info = attributes_for(:forecast, :holt, "#{attribute}": '')
+      update_forecast_analysis('forecast-form', info)
+      expect(page).to have_content(I18n.t('validation.required'))
+    end
   end
 end

@@ -57,6 +57,10 @@ ru:
     success:
       updated: Данные успешно обновлены
   file:
-    invalid: Данный формат '%{value}' не поддерживается
+    invalid: Не поддерживаемый '%{value}'
   close: Закрыть
   remove: Удалить
+  errors:
+    messages:
+      invalid: Веденные данные невалидны
+      blank: Это обязтельное поле

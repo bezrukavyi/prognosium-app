@@ -1,15 +1,13 @@
 module ForecastAnalysis
   class Holt < Base
-    attr_reader :alpha, :beta, :period, :data
-    attr_accessor :trend, :smoothed
+    attr_accessor :alpha, :beta, :period, :data, :trend, :smoothed
+
+    PARAMS = [:alpha, :beta, :period].freeze
 
     def initialize(options)
-      @alpha = options[:alpha]
-      @beta = options[:beta]
-      @period = options[:period]
-      @data = options[:data]
+      super(options, PARAMS)
       @trend = [0]
-      @smoothed = [data[0]]
+      @smoothed = [options[:data][0]]
     end
 
     def visual_forecast

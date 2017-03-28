@@ -57,6 +57,10 @@ en:
     success:
       updated: Data success updated
   file:
-    invalid: Invalid format '%{value}' for uploaded file
+    invalid: Unsupported format '%{value}'
   close: Close
   remove: Remove
+  errors:
+    messages:
+      invalid: Invalid data
+      blank: This is required

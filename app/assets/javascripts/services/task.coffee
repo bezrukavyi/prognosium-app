@@ -1,6 +1,7 @@
 Task = ($resource, Upload) ->
   upload: (file, params) ->
     params.id ||= ''
+    $.each params, (index, value) -> params[index] ||= ''
     Upload.upload(
       url: "/api/projects/#{params.project_id}/tasks/#{params.id}",
       data: { file: file, 'task': params })

@@ -62,6 +62,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'wisper-rspec'
+  gem 'with_model'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

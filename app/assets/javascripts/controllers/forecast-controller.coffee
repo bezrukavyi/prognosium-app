@@ -1,4 +1,4 @@
-ForecastsController = (Forecast, TodoToast, I18n, Access, $state, $filter) ->
+ForecastsController = (Forecast, TodoToast, I18n, Access, $state, $filter, FormError) ->
   ctrl = @
 
   ctrl.update = (form, forecast) ->
@@ -10,7 +10,8 @@ ForecastsController = (Forecast, TodoToast, I18n, Access, $state, $filter) ->
         delete response.$resolved
         Object.assign(forecast, response)
       ), (response) ->
-        TodoToast.error(response.data.error)
+        TodoToast.error(I18n.t('errors.messages.invalid'))
+        FormError.fill(form, response)
 
   ctrl.upload = (form, forecast, file) ->
     return if !file || form.$invalid || !Access.can('request')
@@ -20,7 +21,9 @@ ForecastsController = (Forecast, TodoToast, I18n, Access, $state, $filter) ->
         Object.assign(forecast, response.data)
         TodoToast.success(I18n.t('data.success.updated'))
       ), (response) ->
-        TodoToast.error(response.data.error)
+        error_message = response.data.error || I18n.t('errors.messages.invalid')
+        TodoToast.error(error_message)
+        FormError.fill(form, response)
 
   return
 
@@ -32,5 +35,6 @@ angular.module('toDoApp').controller 'ForecastsController', [
   'Access',
   '$state',
   '$filter',
+  'FormError',
   ForecastsController
 ]

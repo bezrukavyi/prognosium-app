@@ -1,4 +1,4 @@
-AccessRequestInterceptors = (Access, $q) ->
+AccessResponseInterceptors = (Access, $q) ->
   response: (response) ->
     Access.request = true
     response
@@ -8,4 +8,4 @@ AccessRequestInterceptors = (Access, $q) ->
     $q.reject(response)
 
 angular.module('toDoApp').config ($httpProvider) ->
-  $httpProvider.interceptors.push(AccessRequestInterceptors)
+  $httpProvider.interceptors.push(AccessResponseInterceptors)

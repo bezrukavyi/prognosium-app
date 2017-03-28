@@ -2,6 +2,8 @@ module ForecastAnalysis
   class McKanzey < Holt
     attr_reader :fi
 
+    PARAMS = [:alpha, :beta, :period, :fi].freeze
+
     def initialize(options)
       super
       @fi = options[:fi]

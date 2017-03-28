@@ -18,5 +18,21 @@ FactoryGirl.define do
     trait :without_initial_data do
       initial_data nil
     end
+
+    trait :brown do
+      analysis_type :brown
+      period nil
+      beta nil
+      fi nil
+    end
+
+    trait :holt do
+      analysis_type :holt
+      fi nil
+    end
+
+    trait :mc_kanzey do
+      analysis_type :mc_kanzey
+    end
   end
 end

@@ -22,7 +22,7 @@ describe UpdateForecast, type: :command do
     end
 
     it 'invalid' do
-      params[:forecast][:period] = nil
+      params[:forecast][:alpha] = nil
       subject = UpdateForecast.new(forecast, params)
       allow(subject).to receive(:forecast_params).and_return(params[:forecast])
       expect { subject.call }.to broadcast(:invalid)

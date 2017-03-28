@@ -1,10 +1,15 @@
 module ForecastAnalysis
   class Brown < Base
-    attr_reader :alpha, :data
+    attr_accessor :alpha, :data
+
+    PARAMS = [:alpha].freeze
 
     def initialize(options)
-      @alpha = options[:alpha]
-      @data = options[:data]
+      super(options, PARAMS)
+    end
+
+    def forecast_dates(dates)
+      dates << 1
     end
 
     private

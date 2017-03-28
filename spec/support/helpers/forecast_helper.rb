@@ -12,13 +12,13 @@ module Support
     end
 
     def fill_forecast_params(form_id, options)
-      within "##{form_id}" do
-        fill_in 'period', with: options[:period]
-        fill_in 'alpha', with: options[:alpha]
-        fill_in 'beta', with: options[:beta]
-        fill_in 'fi', with: options[:fi]
-      end
       choose_analysis_type(options[:analysis_type])
+      within "##{form_id}" do
+        fill_in 'period', with: options[:period] if options[:period]
+        fill_in 'alpha', with: options[:alpha] if options[:alpha]
+        fill_in 'beta', with: options[:beta] if options[:beta]
+        fill_in 'fi', with: options[:fi] if options[:fi]
+      end
     end
 
     def check_forecast_data(forecast)
@@ -34,6 +34,7 @@ module Support
     def update_forecast_analysis(form_id, options)
       fill_forecast_params(form_id, options)
       find('#update-forecast').click
+      wait_ajax
     end
 
     def check_forecast_info(info)

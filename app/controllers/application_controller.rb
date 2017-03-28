@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include ActionController::Serialization
   include DeviseTokenAuth::Concerns::SetUserByToken
+  include Localable
 
   protect_from_forgery with: :exception
 
