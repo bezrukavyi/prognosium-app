@@ -4,7 +4,7 @@ Forecast = ($resource, Upload, $translate) ->
     $.each params, (index, value) -> params[index] ||= ''
     Upload.upload(
       url: "/api/forecasts/#{params.id}",
-      data: { file: file, 'forecast': params }, method: 'PUT', locale: $translate.use())
+      data: { file: file, 'forecast': params, locale: $translate.use() }, method: 'PUT')
 
   default: $resource '/api/forecasts/:id', { id: '@id', locale: $translate.use() },
     update:

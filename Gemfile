@@ -31,6 +31,7 @@ gem 'cloudinary'
 gem 'acts_as_list'
 gem 'rails_best_practices'
 gem 'roo'
+gem 'roo-xls'
 gem 'rectify'
 
 group :development, :test do

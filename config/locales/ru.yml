@@ -57,7 +57,7 @@ ru:
     success:
       updated: Данные успешно обновлены
   file:
-    invalid: Не поддерживаемый '%{value}'
+    invalid: Формат '%{value}' не поддерживается
   close: Закрыть
   remove: Удалить
   errors:
