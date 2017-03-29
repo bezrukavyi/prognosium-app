@@ -5,6 +5,16 @@ module ForecastAnalysis
 
     subject { Holt.new(options) }
 
+    it 'user default value if options blank' do
+      [:alpha, :beta, :period].each do |param|
+        options[param] = nil
+      end
+      subject = Holt.new(options)
+      [:alpha, :beta, :period].each do |param|
+        expect(subject.send(param)).to eq(Holt::PARAMS[param])
+      end
+    end
+
     describe '#forecast' do
       before do
         allow(subject).to receive(:predicted_values).and_return([])

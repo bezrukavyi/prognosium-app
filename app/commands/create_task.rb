@@ -35,9 +35,6 @@ class CreateTask < Rectify::Command
   end
 
   def forecast
-    options = { initial_data: data.call, period: Forecast::PERIOD,
-                alpha: Forecast::ALPHA, beta: Forecast::BETA, fi: Forecast::FI,
-                analysis_type: :brown }
-    @forecast = task.build_forecast(options)
+    @forecast = task.create_forecast(initial_data: data.call)
   end
 end

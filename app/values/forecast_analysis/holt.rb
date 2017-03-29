@@ -2,7 +2,7 @@ module ForecastAnalysis
   class Holt < Base
     attr_accessor :alpha, :beta, :period, :data, :trend, :smoothed
 
-    PARAMS = [:alpha, :beta, :period].freeze
+    PARAMS = { alpha: 0.3, beta: 0.8, period: 3 }.freeze
 
     def initialize(options)
       super(options, PARAMS)

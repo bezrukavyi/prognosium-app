@@ -37,12 +37,10 @@ class ParseSheetService
     header = spread_sheet.row(1)
     table_values = (2..spread_sheet.last_row).map do |row_number|
       row = spread_sheet.row(row_number)
-      [row[0], row[1]]
-    end.transpose
-    { date_title: header[0],
-      value_title: header[1],
-      dates: table_values[0],
-      values: table_values[1] }
+      [row[0], row[1]] if row[0] && row[1]
+    end.compact.transpose
+    { date_title: header[0], value_title: header[1],
+      dates: table_values[0], values: table_values[1].compact }
   end
 
   def open_spreed_sheet

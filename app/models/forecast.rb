@@ -1,14 +1,11 @@
 class Forecast < ApplicationRecord
-  enum analysis_type: [:brown, :holt, :mc_kanzey]
+  enum analysis_type: ForecastAnalysis::Dispatcher::TYPES
 
   TYPES = analysis_types.keys
 
-  ALPHA = 0.3
-  BETA = 0.8
-  FI = 0.95
-  PERIOD = 3
-
   belongs_to :task
+
+  before_validation :set_optimal_forecast, on: :create
 
   validates :analysis_type, presence: true
   validates :period, :alpha, :beta, :fi, allow_nil: true, numericality: {
@@ -48,7 +45,27 @@ class Forecast < ApplicationRecord
     analysis.error_percent
   end
 
-  def methods_dependencies
-    ForecastAnalysis::Dispatcher.methods_dependencies
+  def forecast_dependencies
+    ForecastAnalysis::Dispatcher.forecast_dependencies
+  end
+
+  def optimal_forecast
+    ForecastAnalysis::Dispatcher.optimal_forecast(data: parsed_initial_data['values'])
+  end
+
+  private
+
+  def set_optimal_forecast
+    return if analysis_type
+    forecast = optimal_forecast
+    self.analysis_type = forecast[:type]
+    @analysis = forecast[:analysis]
+    param_from_analisys(@analysis)
+  end
+
+  def param_from_analisys(analysis)
+    analysis.class::PARAMS.keys.each do |param|
+      send("#{param}=", analysis.send(param))
+    end
   end
 end

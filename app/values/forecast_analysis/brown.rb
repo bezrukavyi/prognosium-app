@@ -2,7 +2,7 @@ module ForecastAnalysis
   class Brown < Base
     attr_accessor :alpha, :data
 
-    PARAMS = [:alpha].freeze
+    PARAMS = { alpha: 0.3 }.freeze
 
     def initialize(options)
       super(options, PARAMS)

@@ -1,5 +1,5 @@
 describe Forecast, type: :model do
-  subject { build :forecast }
+  subject { build :forecast, :brown }
 
   context 'association' do
     it { should belong_to :task }
@@ -62,6 +62,26 @@ describe Forecast, type: :model do
           subject.fi = nil
           expect(subject.valid?).to be_falsey
         end
+      end
+    end
+
+    context 'Before create .set_optimal_forecast' do
+      before do
+        file = fixture_file_upload('/files/for_brown.xlsx')
+        @data = JSON.parse ParseSheetService.call(file, :json)
+      end
+      it 'when analysis type blank' do
+        forecast_analysis = ForecastAnalysis::Dispatcher.optimal_forecast(data: @data['values'])
+        allow_any_instance_of(Forecast).to receive(:optimal_forecast)
+          .and_return(forecast_analysis)
+        subject = create :forecast, analysis_type: nil
+        expect(subject.analysis).to eq(forecast_analysis[:analysis])
+        expect(subject.analysis_type).to eq(forecast_analysis[:type].to_s)
+      end
+      it 'when analysis is exist' do
+        subject = create :forecast, :holt
+        expect(subject.analysis).to be_an_instance_of(ForecastAnalysis::Holt)
+        expect(subject.analysis_type).to eq('holt')
       end
     end
   end

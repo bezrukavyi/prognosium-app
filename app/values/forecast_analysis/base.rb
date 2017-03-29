@@ -3,7 +3,10 @@ module ForecastAnalysis
     attr_reader :dependencies_params
 
     def initialize(options, reqired_params)
-      reqired_params.each { |param| send("#{param}=", options[param]) }
+      reqired_params.each do |param, default_value|
+        value = options[param] || default_value
+        send("#{param}=", value)
+      end
       @data = options[:data]
     end
 

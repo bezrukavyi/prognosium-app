@@ -2,11 +2,11 @@ module ForecastAnalysis
   class McKanzey < Holt
     attr_reader :fi
 
-    PARAMS = [:alpha, :beta, :period, :fi].freeze
+    PARAMS = { alpha: 0.3, beta: 0.8, fi: 0.95, period: 3 }.freeze
 
     def initialize(options)
       super
-      @fi = options[:fi]
+      @fi = options[:fi] || PARAMS[:fi]
     end
 
     def calc_smoothed(data_value, prev_smoothed, prev_trend)

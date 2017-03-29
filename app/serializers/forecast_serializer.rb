@@ -1,7 +1,7 @@
 class ForecastSerializer < ActiveModel::Serializer
   attributes :id, :initial_data, :alpha, :beta, :fi, :period, :analysis_type,
              :support_types, :analysed_data, :deviation_errors, :error_percent,
-             :forecast_dates, :methods_dependencies
+             :forecast_dates, :forecast_dependencies
 
   def support_types
     Forecast::TYPES

@@ -7,7 +7,7 @@ ForecastsDependencies = () ->
     scope.$watch 'forecast', ((newValue, oldValue) ->
       if newValue
         current_method = scope.forecast.analysis_type
-        dependencies = scope.forecast.methods_dependencies[current_method]
+        dependencies = scope.forecast.forecast_dependencies[current_method]
         required = dependencies.includes(scope.field)
         if required
           element.show()

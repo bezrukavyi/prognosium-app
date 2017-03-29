@@ -5,6 +5,16 @@ module ForecastAnalysis
 
     subject { McKanzey.new(options) }
 
+    it 'user default value if options blank' do
+      [:alpha, :beta, :period, :fi].each do |param|
+        options[param] = nil
+      end
+      subject = McKanzey.new(options)
+      [:alpha, :beta, :period, :fi].each do |param|
+        expect(subject.send(param)).to eq(McKanzey::PARAMS[param])
+      end
+    end
+
     describe '#forecast' do
       before do
         allow(subject).to receive(:predicted_values).and_return([])

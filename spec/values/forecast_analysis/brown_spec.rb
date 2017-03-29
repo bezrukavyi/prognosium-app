@@ -5,6 +5,12 @@ module ForecastAnalysis
 
     subject { Brown.new(options) }
 
+    it 'user default value if options blank' do
+      options[:alpha] = nil
+      subject = Brown.new(options)
+      expect(subject.alpha).to eq(Brown::PARAMS[:alpha])
+    end
+
     it '#visual_forecast' do
       expect(subject.visual_forecast).to eq([nil, 106.94, 106.904, 106.633, 106.473])
     end
