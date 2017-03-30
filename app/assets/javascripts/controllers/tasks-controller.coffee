@@ -42,7 +42,7 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
       (response) ->
         Object.assign(task, response)
       ), (response) ->
-        TodoToast.error(response.data.error)
+        TodoToast.error(response.data.errors)
 
   ctrl.delete = (task, project) ->
     return unless Access.can('request')
@@ -54,7 +54,7 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
         TodoToast.success(I18n.t('task.success.deleted', title: response.title))
         ctrl.toProject()
       ), (response) ->
-        TodoToast.error(response.data.error)
+        TodoToast.error(response.data.errors)
 
   ctrl.resetNew = (form) ->
     form.$setPristine()
@@ -67,7 +67,7 @@ TasksController = (Task, TodoToast, I18n, Access, $state, $filter) ->
       task = ui.item.scope().task
       task.position = ui.item.index() + 1
       Task.default.update(task).$promise.then(null, (response) ->
-        TodoToast.error(response.data.error)
+        TodoToast.error(response.data.errors)
       )
 
   ctrl.show(id: ctrl.taskId, project_id: ctrl.projectId) if ctrl.taskId && ctrl.projectId

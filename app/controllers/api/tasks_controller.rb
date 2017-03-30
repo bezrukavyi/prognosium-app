@@ -9,7 +9,7 @@ module Api
     def create
       CreateTask.call(@task, params) do
         on(:valid) { render json: @task }
-        on(:invalid) { |task| render json: { error: task.errors.full_messages } }
+        on(:invalid) { |task| render json: { errors: task.errors.full_messages } }
         on(:invalid_file) do |file_format|
           render json: { error: I18n.t('file.invalid', value: file_format) }, status: :forbidden
         end
@@ -19,7 +19,7 @@ module Api
     def update
       UpdateTask.call(@task, params) do
         on(:valid) { render json: @task }
-        on(:invalid) { |task| render json: { error: task.errors.full_messages } }
+        on(:invalid) { |task| render json: { errors: task.errors.full_messages } }
       end
     end
 
@@ -27,7 +27,7 @@ module Api
       if @task.destroy
         render json: @task
       else
-        render json: { error: @task.errors.full_messages }
+        render json: { errors: @task.errors.full_messages }
       end
     end
 

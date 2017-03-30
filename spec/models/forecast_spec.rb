@@ -6,7 +6,6 @@ describe Forecast, type: :model do
   end
 
   context 'validation' do
-    it { should validate_presence_of(:analysis_type) }
     it do
       should validate_numericality_of(:alpha)
         .is_greater_than_or_equal_to(0)

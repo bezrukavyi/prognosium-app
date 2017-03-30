@@ -40,7 +40,7 @@ ProjectsController = (Project, $stateParams, $state, $filter, I18n, TodoToast, A
         $state.go('projects.detail', projectId: response.id)
         TodoToast.success(I18n.t('project.success.created'))
       ), (response) ->
-        TodoToast.error(response.data.error)
+        TodoToast.error(response.data.errors)
 
   ctrl.edit = (form) ->
     project = ctrl.currentProject
@@ -51,7 +51,7 @@ ProjectsController = (Project, $stateParams, $state, $filter, I18n, TodoToast, A
   ctrl.update = (form, project) ->
     return unless form.$valid
     Project.update(project).$promise.then(null, (response) ->
-      TodoToast.error(response.data.error)
+      TodoToast.error(response.data.errors)
     )
 
   ctrl.delete = (project) ->
@@ -63,7 +63,7 @@ ProjectsController = (Project, $stateParams, $state, $filter, I18n, TodoToast, A
         ctrl.currentProject = null
         TodoToast.success(I18n.t('project.success.deleted', title: response.title))
       ), (response) ->
-        TodoToast.error(response.data.error)
+        TodoToast.error(response.data.errors)
 
   ctrl.itsCurrentProject = (project) ->
     return false unless ctrl.currentProject

@@ -74,7 +74,7 @@ describe Api::TasksController, type: :controller do
       Support::Command::Invalid.block_value = invalid_task
       post :create, params: params
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response['error']).not_to be_blank
+      expect(parsed_response['errors']).not_to be_blank
     end
 
     it 'error by invalid_file command' do
@@ -114,7 +114,7 @@ describe Api::TasksController, type: :controller do
       Support::Command::Invalid.block_value = invalid_task
       patch :update, params: params
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response['error']).not_to be_blank
+      expect(parsed_response['errors']).not_to be_blank
     end
   end
 

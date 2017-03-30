@@ -14,7 +14,7 @@ module Api
       if @project.update_attributes(project_params)
         render json: @project
       else
-        render json: { error: @project.errors.full_messages }
+        render json: { errors: @project.errors.full_messages }
       end
     end
 
@@ -22,7 +22,7 @@ module Api
       if @project.save
         render json: @project
       else
-        render json: { error: @project.errors.full_messages }
+        render json: { errors: @project.errors.full_messages }
       end
     end
 
@@ -30,7 +30,7 @@ module Api
       if @project.destroy
         render json: @project
       else
-        render json: { error: @project.errors.full_messages }
+        render json: { errors: @project.errors.full_messages }
       end
     end
 

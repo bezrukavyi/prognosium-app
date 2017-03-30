@@ -5,7 +5,7 @@ module Api
     def update
       UpdateForecast.call(@forecast, params) do
         on(:valid) { render json: @forecast }
-        on(:invalid) { |forecast| render json: { error: forecast.errors }, status: :forbidden }
+        on(:invalid) { |forecast| render json: { errors: forecast.errors }, status: :forbidden }
         on(:invalid_file) do |file_format|
           render json: { error: I18n.t('file.invalid', value: file_format) }, status: :forbidden
         end

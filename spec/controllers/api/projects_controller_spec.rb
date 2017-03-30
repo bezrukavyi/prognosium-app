@@ -62,7 +62,7 @@ describe Api::ProjectsController, type: :controller do
     it 'when data invalid' do
       post :create, params: { project: attributes_for(:project, :invalid) }
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response['error']).not_to be_blank
+      expect(parsed_response['errors']).not_to be_blank
     end
   end
 
@@ -84,7 +84,7 @@ describe Api::ProjectsController, type: :controller do
                                project: attributes_for(:project, :invalid) }
 
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response['error']).not_to be_blank
+      expect(parsed_response['errors']).not_to be_blank
     end
   end
 
