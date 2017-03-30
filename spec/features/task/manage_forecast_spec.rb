@@ -18,7 +18,7 @@ feature 'Manage forecast', type: :feature, js: true do
 
   scenario 'user can show forecast info' do
     choose_task(@task)
-    check_forecast_data(@forecast)
+    check_forecast(@forecast)
   end
 
   scenario 'user can upload new data by all forecast types' do
@@ -39,7 +39,7 @@ feature 'Manage forecast', type: :feature, js: true do
       info = attributes_for(:forecast, type.to_sym)
       update_forecast_analysis('forecast-form', info)
       check_forecast_info(info)
-      check_forecast_data(@forecast)
+      check_forecast(@forecast)
     end
   end
 

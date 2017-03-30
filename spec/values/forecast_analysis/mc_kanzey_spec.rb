@@ -19,9 +19,8 @@ module ForecastAnalysis
       before do
         allow(subject).to receive(:predicted_values).and_return([])
       end
-      it 'calc forecast' do
-        forecast = subject.forecast.map { |value| value.round(3) }
-        expect(forecast).to eq([106.94, 100.138, 94.002])
+      it 'rounded_forecast' do
+        expect(subject.rounded_forecast).to eq([nil, 106.94, 100.138, 94.002, 90.471, 86.6, 82.729])
       end
       it 'calc trend and smoothed' do
         subject.forecast
@@ -33,13 +32,11 @@ module ForecastAnalysis
     end
 
     it '#deviation_errors' do
-      expect(subject.round_deviation_errors).to eq([0.014, 34.363, 146.364])
+      expect(subject.rounded_deviation_errors).to eq([nil, 0.12, 5.862, 12.098])
     end
 
     it '#error_percent' do
-      allow(subject).to receive(:deviation_errors).and_return([100, 2, 30, 12])
-      allow(subject).to receive(:data).and_return([21, 2, 1, 12])
-      expect(subject.error_percent).to eq(4)
+      expect(subject.error_percent).to eq(2.691)
     end
 
     context 'With file test.xlsx' do
@@ -48,12 +45,9 @@ module ForecastAnalysis
         data = JSON.parse ParseSheetService.call(file, :json)
         options[:data] = data['values']
       end
-      it '#forecast' do
-        allow(subject).to receive(:calc_forecast).and_return([1, 2, 3])
-        expect(subject.visual_forecast).to eq([nil, 1, 2, 3, 101.004, 99.986, 98.969])
-      end
       it '#predicted_values' do
-        expect(subject.predicted_values).to eq([101.004, 99.986, 98.969])
+        predicted_values = subject.predicted_values.map { |value| value.round(3) }
+        expect(predicted_values).to eq([101.004, 99.986, 98.969])
       end
     end
   end

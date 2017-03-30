@@ -25,7 +25,7 @@ ru:
     analysed: Прогноз
     type: Метод Прогнозирования
     deviation_errors: Ошибка отклонения
-    error_percent: Средняя ошибка отклонения
+    error_percent: Средняя Абсолютная Процентная Ошибка
     methods:
       brown: Метод Брауна
       holt: Метод Холта

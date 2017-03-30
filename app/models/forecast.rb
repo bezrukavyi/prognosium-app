@@ -18,31 +18,17 @@ class Forecast < ApplicationRecord
   validates :beta, :period, required_for: { analysis_type: [:holt, :mc_kanzey] }
   validates :fi, required_for: { analysis_type: [:mc_kanzey] }
 
+  def analysis
+    @analysis ||= set_analysis
+  end
+
   def parsed_initial_data
     return [] unless initial_data
     @parsed_initial_data ||= JSON.parse initial_data
   end
 
-  def analysis
-    options = { alpha: alpha, beta: beta, fi: fi, period: period,
-                type: analysis_type, data: parsed_initial_data['values'] }
-    @analysis ||= ForecastAnalysis::Dispatcher.new(options)
-  end
-
   def forecast_dates
     analysis.forecast_dates(parsed_initial_data['dates'])
-  end
-
-  def analysed_data
-    @analysed_data ||= analysis.visual_forecast
-  end
-
-  def deviation_errors
-    analysis.round_deviation_errors
-  end
-
-  def error_percent
-    analysis.error_percent
   end
 
   def forecast_dependencies
@@ -54,6 +40,12 @@ class Forecast < ApplicationRecord
   end
 
   private
+
+  def set_analysis
+    options = { alpha: alpha, beta: beta, fi: fi, period: period,
+                type: analysis_type, data: parsed_initial_data['values'] }
+    ForecastAnalysis::Dispatcher.new(options)
+  end
 
   def set_optimal_forecast
     return if analysis_type

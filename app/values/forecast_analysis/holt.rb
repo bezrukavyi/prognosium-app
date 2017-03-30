@@ -5,13 +5,10 @@ module ForecastAnalysis
     PARAMS = { alpha: 0.3, beta: 0.8, period: 3 }.freeze
 
     def initialize(options)
-      super(options, PARAMS)
-      @trend = [0]
-      @smoothed = [options[:data][0]]
-    end
-
-    def visual_forecast
-      @visual_forecast ||= super + predicted_values
+      @alpha = options[:alpha] || PARAMS[:alpha]
+      @beta = options[:beta] || PARAMS[:beta]
+      @period = options[:period] || PARAMS[:period]
+      super(options)
     end
 
     private
@@ -22,10 +19,12 @@ module ForecastAnalysis
       (data.size - 1).times.each do |index|
         forecast_data << smoothed[index] + trend[index]
       end
-      forecast_data
+      forecast_data + calc_predicted_values
     end
 
     def calc_trend_smoothed
+      self.trend = [0]
+      self.smoothed = [data[0]]
       data.size.times do |index|
         next if index.zero?
         prev_smoothed = smoothed[index - 1]

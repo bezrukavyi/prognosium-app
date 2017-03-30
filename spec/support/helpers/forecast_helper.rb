@@ -21,14 +21,15 @@ module Support
       end
     end
 
-    def check_forecast_data(forecast)
-      forecast = forecast.instance_of?(Object::Forecast) ? forecast.initial_data : forecast
-      initial_data = JSON.parse forecast
-      table_values = initial_data['dates'].zip(initial_data['values']).to_h
-      table_values.each do |date, value|
-        expect(page).to have_content(date)
-        expect(page).to have_content(value)
-      end
+    def check_forecast(forecast)
+      table_values = forecast.forecast_dates.zip(forecast.analysis.forecast).to_h
+      check_forecast_table(table_values)
+    end
+
+    def check_forecast_data(data)
+      data = JSON.parse data
+      table_values = data['dates'].zip(data['values']).to_h
+      check_forecast_table(table_values)
     end
 
     def update_forecast_analysis(form_id, options)
@@ -39,7 +40,8 @@ module Support
 
     def check_forecast_info(info)
       expect(page).to have_content(I18n.t("forecast.methods.#{info[:analysis_type]}"))
-      %w(alpha beta period analysed_data analysed_data error_percent).each do |attribute|
+      %w(alpha beta fi period).each do |attribute|
+        next unless info[attribute]
         expect(page).to have_content(info[attribute])
       end
     end
@@ -47,6 +49,16 @@ module Support
     def choose_analysis_type(type)
       first('.types-select').click
       find("#select-#{type}").click
+    end
+
+    private
+
+    def check_forecast_table(table_values)
+      table_values.each do |date, value|
+        next unless value
+        expect(page).to have_content(date)
+        expect(page).to have_content(value.round(3))
+      end
     end
   end
 end

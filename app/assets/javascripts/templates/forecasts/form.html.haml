@@ -12,7 +12,7 @@
 
         %md-input-container.md-block(forecasts_dependencies forecast='forecast' field="'period'")
           %label {{ 'forecast.period' | translate }}
-          %input(ng_model='forecast.period' name='period' min='1' max='5' type='number' server-error)
+          %input(ng_model='forecast.period' name='period' min='1' type='number' step='1' server-error)
           %div.validators(ng_messages='forecastForm.period.$error')
             %div(ng_message='server') {{ forecastForm.period.errors }}
 
@@ -42,4 +42,4 @@
 
   .forecast-chart-wrap(flex='')
     %forecasts_chart(ctrl='ctrl' forecast='forecast')
-    {{ 'forecast.error_percent' | translate }} {{ forecast.error_percent }}
+    {{ 'forecast.error_percent' | translate }} {{ forecast.analysis.error_percent + '%' }}

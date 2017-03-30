@@ -5,7 +5,8 @@ module ForecastAnalysis
     PARAMS = { alpha: 0.3 }.freeze
 
     def initialize(options)
-      super(options, PARAMS)
+      @alpha = options[:alpha] || PARAMS[:alpha]
+      super(options)
     end
 
     def forecast_dates(dates)
@@ -21,6 +22,10 @@ module ForecastAnalysis
         forecast_data << formula(data[index], forecast_data[index - 1])
       end
       forecast_data
+    end
+
+    def calc_predicted_values
+      []
     end
 
     def formula(initial_value, forecast_value)

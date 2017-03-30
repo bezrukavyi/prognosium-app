@@ -1,43 +1,31 @@
 module ForecastAnalysis
   class Base
-    attr_reader :dependencies_params
+    attr_reader :forecast, :rounded_forecast, :rounded_deviation_errors,
+                :deviation_errors, :error_percent, :predicted_values,
+                :forecast_dates
 
-    def initialize(options, reqired_params)
-      reqired_params.each do |param, default_value|
-        value = options[param] || default_value
-        send("#{param}=", value)
-      end
+    def initialize(options)
       @data = options[:data]
-    end
-
-    def forecast
-      @forecast ||= calc_forecast
-      @forecast.compact
-    end
-
-    def visual_forecast
-      round_data(forecast).unshift(nil)
-    end
-
-    def round_deviation_errors
-      round_data(deviation_errors)
-    end
-
-    def deviation_errors
-      @deviation_errors ||= calc_errors
-    end
-
-    def error_percent
-      @average_error ||= (calc_average(deviation_errors) / calc_average(data)).round(6)
-    end
-
-    def predicted_values
-      @predicted_values ||= round_data(calc_predicted_values)
+      @forecast = calc_forecast.unshift(nil)
+      @deviation_errors = calc_errors
+      @error_percent = calc_mape
     end
 
     def forecast_dates(dates)
       period.times { |index| dates << (index + 1).to_s }
       dates
+    end
+
+    def predicted_values
+      calc_predicted_values
+    end
+
+    def rounded_forecast
+      round_data(forecast)
+    end
+
+    def rounded_deviation_errors
+      round_data(deviation_errors)
     end
 
     private
@@ -47,10 +35,18 @@ module ForecastAnalysis
     end
 
     def calc_errors
-      (0...forecast.size).to_a.map do |index|
-        next unless data[index + 1]
-        ((data[index + 1] - forecast[index])**2)
-      end.compact
+      (0...data.size).to_a.map do |index|
+        next unless forecast[index]
+        (data[index] - forecast[index]).abs
+      end
+    end
+
+    def calc_mape
+      errors = deviation_errors.each_with_index.map do |error, index|
+        next if error.nil? || forecast[index].nil?
+        error / forecast[index]
+      end
+      ((errors.compact.sum / forecast.size) * 100).round(3)
     end
 
     def calc_average(array_data)

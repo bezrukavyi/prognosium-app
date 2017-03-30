@@ -25,7 +25,7 @@ en:
     analysed: Forecast
     type: Forecast Method
     deviation_errors: Deviation Error
-    error_percent: Average Percent Error
+    error_percent: The Mean Absolute Percentage Error
     methods:
       brown: Brown's method
       holt: Holt's method
