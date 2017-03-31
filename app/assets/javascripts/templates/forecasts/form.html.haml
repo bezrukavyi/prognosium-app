@@ -6,11 +6,13 @@
 
       %md-content(flex='')
         %md-input-container.md-block
+          %tooltip(text="'tooltip.' + forecast.analysis_type | translate")
           %label {{ 'forecast.type' | translate }}
           %md-select.types-select(required='' ng-model='forecast.analysis_type')
-            %md-option.type-option(id="select-{{type}}" ng-repeat="type in forecast.support_types" ng-value='type') {{ 'forecast.methods.' + type | translate }}
+            %md-option.type-option(id="select-{{type}}" ng-repeat="type in forecast.support_types" ng-value='type') {{ 'forecast.method.' + type | translate }}
 
-        %md-input-container.md-block(forecasts_dependencies forecast='forecast' field="'period'")
+        %md-input-container.md-block(forecasts_dependencies='forecast' field="'period'")
+          %tooltip(text="'tooltip.period' | translate")
           %label {{ 'forecast.period' | translate }}
           %input(ng_model='forecast.period' name='period' min='1' type='number' step='1' server-error)
           %div.validators(ng_messages='forecastForm.period.$error')
@@ -18,14 +20,16 @@
 
         .forecast-patameters(layout='row' layout_align='space-between center')
           %md-input-container.md-block(ng-repeat="field in ['alpha', 'beta', 'fi']"
-            forecasts_dependencies forecast='forecast' field='field')
+            forecasts_dependencies='forecast'
+            field='field')
+            %tooltip(text="'tooltip.' + field | translate")
             %label {{ 'forecast.' + field | translate }}
             %input(ng_model='forecast[field]' name='{{field}}' min='0' max='1' type='number' step='0.01' server-error)
             %div.validators(ng_messages='forecastForm[field].$error')
               %div(ng_message='server') {{ forecastForm[field].errors }}
 
       .form-actions(layout='column')
-        %md-button.md-raised.md-24(aria-label='upload forecast'
+        %md-button.md-raised(aria-label='upload forecast'
           ngf-change='forecastForm.$setSubmitted(); ctrl.upload(forecastForm, forecast, $file)'
           ngf-select='')
           %md-icon file_upload
@@ -35,7 +39,7 @@
             ngf-change='forecastForm.$setSubmitted(); ctrl.upload(forecastForm, forecast, $file)'
             ngf-select='')
 
-        %md-button#update-forecast.md-raised.md-primary.md-24(aria-label='update forecast' type='submit')
+        %md-button#update-forecast.md-primary.md-raised(aria-label='update forecast' type='submit')
           %md-icon replay
           {{ 'forecast.update' | translate }}
 

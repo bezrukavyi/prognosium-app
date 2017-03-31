@@ -1,5 +1,7 @@
 .data-content(layout='row' layout_align='space-between start')
   .chart(flex='' layout='row')
-    %canvas#line.chart(class="chart chart-line"
+    %canvas#forecast-chart(class="chart chart-line"
       chart-data="[forecast.analysis.forecast, forecast.analysis.data]"
       chart-labels="forecast.forecast_dates")
+    %md-button.chart-download.md-primary.md-raised.md-icon-button.md-24(save-chart='forecast-chart')
+      %md-icon file_download

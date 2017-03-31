@@ -9,12 +9,23 @@
   }
   .chart {
     margin-bottom: 20px;
+    position: relative;
+    .chart-download {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 }
 .forecast-patameters {
   .md-block {
     margin: 0;
     flex-basis: 45%;
+  }
+}
+.forecast-form {
+  & > md-whiteframe > md-content {
+    overflow: visible;
   }
 }
 @media (max-width: 599px) {

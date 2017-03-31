@@ -26,7 +26,7 @@ en:
     type: Forecast Method
     deviation_errors: Deviation Error
     error_percent: The Mean Absolute Percentage Error
-    methods:
+    method:
       brown: Brown's method
       holt: Holt's method
       mc_kanzey: Gardner-McKanzey's method
@@ -64,3 +64,11 @@ en:
     messages:
       invalid: Invalid data
       blank: This is required
+  tooltip:
+    alpha: Alpha Alpha Alpha Alpha Alpha Alpha Alpha
+    beta: Beta Beta Beta Beta Beta Beta Beta
+    fi: Fi Fi Fi Fi Fi Fi Fi Fi Fi
+    period: Forecast period Forecast period Forecast period
+    brown: Brown's method Brown's method Brown's method Brown's method
+    holt: Holt's method Holt's method Holt's method Holt's method
+    mc_kanzey: Gardner-McKanzey's method Gardner-McKanzey's method

@@ -26,7 +26,7 @@ ru:
     type: Метод Прогнозирования
     deviation_errors: Ошибка отклонения
     error_percent: Средняя Абсолютная Процентная Ошибка
-    methods:
+    method:
       brown: Метод Брауна
       holt: Метод Холта
       mc_kanzey: Метод Гарднера Маккензи
@@ -64,3 +64,11 @@ ru:
     messages:
       invalid: Веденные данные невалидны
       blank: Это обязтельное поле
+  tooltip:
+    alpha: Альфа
+    beta: Бета
+    fi: Фи
+    period: Период прогноза
+    brown: Метод Брауна
+    holt: Метод Холта
+    mc_kanzey: Метод Гарднера Маккензи

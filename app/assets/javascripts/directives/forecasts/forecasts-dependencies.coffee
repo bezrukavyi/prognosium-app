@@ -1,13 +1,14 @@
 ForecastsDependencies = () ->
   restrict: 'A'
   scope:
-    forecast: '='
+    forecastsDependencies: '='
     field: '='
   link: (scope, element, attrs) ->
-    scope.$watch 'forecast', ((newValue, oldValue) ->
+    scope.$watch 'forecastsDependencies', ((newValue, oldValue) ->
+      forecast = scope.forecastsDependencies
       if newValue
-        current_method = scope.forecast.analysis_type
-        dependencies = scope.forecast.forecast_dependencies[current_method]
+        current_method = forecast.analysis_type
+        dependencies = forecast.forecast_dependencies[current_method]
         required = dependencies.includes(scope.field)
         if required
           element.show()

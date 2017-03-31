@@ -114,39 +114,6 @@
     margin: 0;
   }
 }
-.md-icon-button {
-  &.base-md {
-    margin: 0;
-    padding: 4px;
-  }
-  &.md-18 {
-    @extend .base-md;
-    min-height: 30px;
-    height: 30px;
-    width: 30px;
-    .material-icons {
-      font-size: 18px;
-    }
-  }
-  &.md-20 {
-    @extend .base-md;
-    min-height: 35px;
-    height: 35px;
-    width: 35px;
-    .material-icons {
-      font-size: 20px;
-    }
-  }
-  &.md-24 {
-    @extend .base-md;
-    min-height: 40px;
-    height: 40px;
-    width: 40px;
-    .material-icons {
-      font-size: 24px;
-    }
-  }
-}
 .todo-add-button {
   top: auto;
   right: 20px;
@@ -185,4 +152,44 @@
 }
 #back-project {
   text-align: left;
+}
+
+.md-block {
+  .relative {
+    position: relative;
+    font-size: 12px;
+  }
+}
+.md-icon-button {
+  .base-md {
+    margin: 0;
+    padding: 4px;
+  }
+  &.md-18 {
+    @extend .base-md;
+    min-height: 30px;
+    height: 30px;
+    width: 30px;
+    .material-icons {
+      font-size: 18px;
+    }
+  }
+  &.md-20 {
+    @extend .base-md;
+    min-height: 35px;
+    height: 35px;
+    width: 35px;
+    .material-icons {
+      font-size: 20px;
+    }
+  }
+  &.md-24 {
+    @extend .base-md;
+    min-height: 40px;
+    height: 40px;
+    width: 40px;
+    .material-icons {
+      font-size: 24px;
+    }
+  }
 }
