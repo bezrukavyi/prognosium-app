@@ -1,7 +1,13 @@
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 50px;
+}
 .table {
   table-layout: fixed;
   border-spacing: 0;
   border-bottom-color: transparent;
+  min-width: 500px;
+  margin: 0 auto;
   > thead,
   > tbody,
   > tfoot {
@@ -20,16 +26,4 @@
       }
     }
   }
-}
-
-.data-content {
-  display: block;
-  .table {
-    margin: 0 auto;
-    margin-bottom: 50px;
-  }
-}
-.forecast-table {
-  margin: 0 auto;
-  width: 100%;
 }

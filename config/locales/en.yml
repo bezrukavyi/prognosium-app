@@ -4,6 +4,9 @@ en:
   project:
     default_title: New project
     empty_title: Choose project or create new
+    empty_tasks:
+      title: "Sorry, but you haven't any task"
+      note: "Note: To create a new task, you need a file with one of the extensions '.xlsx .xls .csv'. The contents of the uploaded file means having two columns of data, the first is the date at the time the value was determined, the second is the actual value."
     list_title: Your projects
     new: New project
     success:
@@ -65,10 +68,10 @@ en:
       invalid: Invalid data
       blank: This is required
   tooltip:
-    alpha: Alpha Alpha Alpha Alpha Alpha Alpha Alpha
-    beta: Beta Beta Beta Beta Beta Beta Beta
-    fi: Fi Fi Fi Fi Fi Fi Fi Fi Fi
-    period: Forecast period Forecast period Forecast period
-    brown: Brown's method Brown's method Brown's method Brown's method
-    holt: Holt's method Holt's method Holt's method Holt's method
-    mc_kanzey: Gardner-McKanzey's method Gardner-McKanzey's method
+    alpha: Alpha is an adaptation parameter. The closer it is to 1, the faster information is updated, that is, the more weight have new observations.
+    beta: Beta is an anti-aliasing parameter that regulates the process of trend adaptation.
+    fi: Fi - parameter of smoothing, which performs the function of suppressing the trend
+    period: The period for which the forecast is carried out
+    brown: "The Brown's method reflects development not only in the form of a linear trend, but also in the form of a random process that has no tendency."
+    holt: "The main difference between the Holt's method is the consideration of the simulation of the trend of the series."
+    mc_kanzey: "Using the Gardner-Mackenzie's method, the linear trend becomes less pronounced as the period advances"

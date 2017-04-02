@@ -35,5 +35,10 @@
     %tasks_create(ctrl='tasks' project='projects.currentProject')
 
     .todo-list{ 'ui-sortable': 'tasks.sortableOptions', 'ng-model': 'projects.currentProject.tasks' }
+
+      .task-empty(flex='' layout='column' layout_align='center center' ng_if='!projects.currentProject.tasks.length')
+        .title {{ 'project.empty_tasks.title' | translate }}
+        .note {{ 'project.empty_tasks.note' | translate }}
+
       .task-wrap{ 'ng-repeat': 'task in projects.currentProject.tasks' }
         %tasks_item(ctrl='tasks' task='task' project='projects.currentProject')

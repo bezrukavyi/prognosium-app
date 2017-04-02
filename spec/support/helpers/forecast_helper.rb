@@ -39,7 +39,7 @@ module Support
     end
 
     def check_forecast_info(info)
-      expect(page).to have_content(I18n.t("forecast.methods.#{info[:analysis_type]}"))
+      expect(page).to have_content(I18n.t("forecast.method.#{info[:analysis_type]}"))
       %w(alpha beta fi period).each do |attribute|
         next unless info[attribute]
         expect(page).to have_content(info[attribute])

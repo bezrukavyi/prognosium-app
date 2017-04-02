@@ -26,3 +26,13 @@
 .task-form {
   @extend .project-form;
 }
+.task-empty {
+  color: #989898;
+  margin: 35px 0;
+  .title {
+    margin-bottom: 10px;
+  }
+  .note {
+    font-size: 11px;
+  }
+}

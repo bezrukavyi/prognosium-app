@@ -12,8 +12,14 @@
     position: relative;
     .chart-download {
       position: absolute;
-      right: 0;
-      top: 0;
+      right: -25px;
+      top: -20px;
+      padding: 0;
+      md-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

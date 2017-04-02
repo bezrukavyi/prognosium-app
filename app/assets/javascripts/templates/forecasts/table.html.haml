@@ -1,13 +1,14 @@
-%table.table
-  %thead
-    %tr
-      %th {{ 'data.dates' | translate }}
-      %th {{ 'data.values' | translate }}
-      %th {{ 'forecast.analysed' | translate }}
-      %th {{ 'forecast.deviation_errors' | translate }}
-  %tbody
-    %tr(ng_repeat="date in forecast.forecast_dates")
-      %td {{ date }}
-      %td {{ forecast.analysis.data[$index] | number : 3 }}
-      %td {{ forecast.analysis.forecast[$index]  | number : 3 }}
-      %td {{ forecast.analysis.deviation_errors[$index] | number : 3 }}
+.table-wrap
+  %table.table
+    %thead
+      %tr
+        %th {{ 'data.dates' | translate }}
+        %th {{ 'data.values' | translate }}
+        %th {{ 'forecast.analysed' | translate }}
+        %th {{ 'forecast.deviation_errors' | translate }}
+    %tbody
+      %tr(ng_repeat="date in forecast.forecast_dates")
+        %td {{ date }}
+        %td {{ forecast.analysis.data[$index] | number : 3 }}
+        %td {{ forecast.analysis.forecast[$index]  | number : 3 }}
+        %td {{ forecast.analysis.deviation_errors[$index] | number : 3 }}
